@@ -23,6 +23,8 @@ public class Nave4 {
     private boolean herido = false;
     private int tiempoHeridoMax=50;
     private int tiempoHerido;
+    private float rotacion =0.0f;
+    private float max=5;
     
     public Nave4(int x, int y, Texture tx, Sound soundChoque, Texture txBala, Sound soundBala) {
     	sonidoHerido = soundChoque;
@@ -39,25 +41,31 @@ public class Nave4 {
         float y =  spr.getY();
         if (!herido) {
 	        // que se mueva con teclado
+        	/*
 	        if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) xVel--;
 	        if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) xVel++;
         	if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) yVel--;     
 	        if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) yVel++;
-        	
-	     /*   if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) spr.setRotation(++rotacion);
+        	*/
+	        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) spr.setRotation(++rotacion);
 	        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) spr.setRotation(--rotacion);
 	        
 	        if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
 	        	xVel -=Math.sin(Math.toRadians(rotacion));
+	        	
 	        	yVel +=Math.cos(Math.toRadians(rotacion));
+	        	
 	        	System.out.println(rotacion+" - "+Math.sin(Math.toRadians(rotacion))+" - "+Math.cos(Math.toRadians(rotacion))) ;    
 	        }
 	        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)){
 	        	xVel +=Math.sin(Math.toRadians(rotacion));
 	        	yVel -=Math.cos(Math.toRadians(rotacion));
 	        	     
-	        }*/
-	        
+	        }
+	        if (xVel>max) xVel=max;
+	        if (yVel>max) yVel=max;
+	        if (xVel<-max) xVel=-max;
+	        if (yVel<-max) yVel=-max;
 	        // que se mantenga dentro de los bordes de la ventana
 	        if (x+xVel < 0 || x+xVel+spr.getWidth() > Gdx.graphics.getWidth())
 	        	xVel*=-1;
@@ -75,9 +83,13 @@ public class Nave4 {
  		   if (tiempoHerido<=0) herido = false;
  		 }
         // disparo
+        
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {         
-          Bullet  bala = new Bullet(spr.getX()+spr.getWidth()/2-5,spr.getY()+ spr.getHeight()-5,0,3,txBala);
-	      juego.agregarBala(bala);
+          Bullet  balaL = new Bullet(spr.getX()+spr.getWidth()/2,spr.getY()+ spr.getHeight(),(int)(-10*Math.cos(Math.toRadians(rotacion))),(int)(-10*Math.sin(Math.toRadians(rotacion))),txBala);
+          Bullet  balaR = new Bullet(spr.getX()+spr.getWidth()/2,spr.getY()+ spr.getHeight(),(int)(10*Math.cos(Math.toRadians(rotacion))),(int)(10*Math.sin(Math.toRadians(rotacion))),txBala);
+
+          juego.agregarBala(balaL);
+          juego.agregarBala(balaR);
 	      soundBala.play();
         }
        
