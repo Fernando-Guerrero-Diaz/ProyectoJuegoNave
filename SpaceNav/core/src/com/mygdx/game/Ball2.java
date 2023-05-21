@@ -13,6 +13,8 @@ public class Ball2 {
     private int xSpeed;
     private int ySpeed;
     private Sprite spr;
+    private int exitmargen=50;
+    private int entermargen=10;
 
     public Ball2(int x, int y, int size, int xSpeed, int ySpeed, Texture tx) {
     	spr = new Sprite(tx);
@@ -34,11 +36,19 @@ public class Ball2 {
     public void update() {
         x += getXSpeed();
         y += getySpeed();
-
-        if (x+getXSpeed() < 0 || x+getXSpeed()+spr.getWidth() > Gdx.graphics.getWidth())
+        
+        if ((x+getXSpeed()< -exitmargen))
+        	x=Gdx.graphics.getWidth()+entermargen;        	
+        else if(x+getXSpeed()+spr.getWidth() > Gdx.graphics.getWidth()+exitmargen+entermargen)
+        	x=-entermargen ;        
+        if (y+getySpeed() < -exitmargen +entermargen)
+        	y=Gdx.graphics.getHeight()+entermargen;
+        if(y+getySpeed()+spr.getHeight() > Gdx.graphics.getHeight()+exitmargen+entermargen)
+        	y=-entermargen;
+        /*if (x+getXSpeed() < 0 || x+getXSpeed()+spr.getWidth() > Gdx.graphics.getWidth())
         	setXSpeed(getXSpeed() * -1);
         if (y+getySpeed() < 0 || y+getySpeed()+spr.getHeight() > Gdx.graphics.getHeight())
-        	setySpeed(getySpeed() * -1);
+        	setySpeed(getySpeed() * -1);*/
         spr.setPosition(x, y);
     }
     
@@ -51,7 +61,7 @@ public class Ball2 {
     
     public void checkCollision(Ball2 b2) {
         if(spr.getBoundingRectangle().overlaps(b2.spr.getBoundingRectangle())){
-        	// rebote
+        	// rebote de asteroides si lo quitas se transpasas
             if (getXSpeed() ==0) setXSpeed(getXSpeed() + b2.getXSpeed()/2);
             if (b2.getXSpeed() ==0) b2.setXSpeed(b2.getXSpeed() + getXSpeed()/2);
         	setXSpeed(- getXSpeed());
