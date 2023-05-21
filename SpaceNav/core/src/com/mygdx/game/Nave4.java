@@ -24,8 +24,11 @@ public class Nave4 {
     private int tiempoHeridoMax=50;
     private int tiempoHerido;
     private float rotacion =0.0f;
+    private float direccion = 0.0f;
     private float max=5;
     private float velocidad=0.0f;
+    private int tiempoAutoDireccion=0;
+    private float rotVel=5.0f;
     
     public Nave4(int x, int y, Texture tx, Sound soundChoque, Texture txBala, Sound soundBala) {
     	sonidoHerido = soundChoque;
@@ -43,21 +46,53 @@ public class Nave4 {
         if (!herido) {
 	        // que se mueva con teclado
 
-	        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.DOWN)) rotacion = 135.0f;
-	        else if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.UP)) rotacion = 45.0f;
-	        else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.UP)) rotacion = 315.0f;
-	        else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.DOWN)) rotacion = 225.0f;
-	        else if (Gdx.input.isKeyPressed(Input.Keys.UP)) rotacion = 0.0f;
-	        else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) rotacion = 90.0f;
-	        else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) rotacion = 180.0f;
-	        else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) rotacion = 270.0f;
-	        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.DOWN)) velocidad = velocidad + 0.3f;
+	        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.DOWN)) direccion = 135.0f;
+	        else if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.UP)) direccion = 45.0f;
+	        else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.UP)) direccion = 315.0f;
+	        else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.DOWN)) direccion = 225.0f;
+	        else if (Gdx.input.isKeyPressed(Input.Keys.UP)) direccion = 0.0f;
+	        else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) direccion = 90.0f;
+	        else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) direccion = 180.0f;
+	        else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) direccion = 270.0f;
+	        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) 
+	        		|| Gdx.input.isKeyPressed(Input.Keys.LEFT) 
+	        		|| Gdx.input.isKeyPressed(Input.Keys.UP) 
+	        		|| Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+		        if ((velocidad > 1) &&
+		        		((rotacion > direccion+135 && rotacion < direccion +225) ||
+		        		 (rotacion > direccion-135 && rotacion < direccion -225))) {
+		        	velocidad = velocidad -0.25f;
+		        }
+		        else {
+		        	if (rotacion < direccion) {
+		        		if (rotacion < direccion -180) rotacion=rotacion-rotVel;
+		        		else rotacion=rotacion+rotVel;
+		        		}
+		        	else {
+		        		if(rotacion < direccion + 180) rotacion=rotacion-rotVel;
+		        		else rotacion=rotacion+rotVel;
+		        		}
+		        	if ((rotacion < direccion +45 && rotacion > direccion -45) ||
+		        		(rotacion < direccion -315 && rotacion > direccion -405) ||
+		        		(rotacion < direccion +405 && rotacion > direccion +315)) {
+		        		velocidad = velocidad + 0.3f;
+		        	}
+		        }
+
+	        	tiempoAutoDireccion=40;
+	        }
 	        else {
 	        	if (velocidad>0)
-	        	velocidad = velocidad - 0.20f;
+	        	velocidad = velocidad - 0.10f;
 	        	else velocidad = 0.0f;
+	        	if (velocidad < 0.2f && tiempoAutoDireccion >0) {
+	        		tiempoAutoDireccion--;
+	        	}
+	        	if (tiempoAutoDireccion <=0) direccion = 0.0f;
 	        }
 
+	        if (rotacion>360.0f) rotacion = rotacion -360.0f;
+	        if (rotacion<0.0f) rotacion = 360.0f - rotacion;
 	        if (velocidad>max) velocidad = max;
 	        xVel =(float) ( velocidad * -Math.sin(Math.toRadians(rotacion)));
 	        yVel =(float) ( velocidad * Math.cos(Math.toRadians(rotacion)));
