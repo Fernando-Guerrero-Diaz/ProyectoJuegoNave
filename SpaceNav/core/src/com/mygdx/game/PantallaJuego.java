@@ -25,6 +25,9 @@ public class PantallaJuego implements Screen {
 	private int velXAsteroides; 
 	private int velYAsteroides; 
 	private int cantAsteroides;
+	private Texture texture;
+	private int yOcean=0;
+	private int yOcean2;
 	
 	private Nave4 nave;
 	private  ArrayList<Ball2> balls1 = new ArrayList<>();
@@ -40,7 +43,7 @@ public class PantallaJuego implements Screen {
 		this.velXAsteroides = velXAsteroides;
 		this.velYAsteroides = velYAsteroides;
 		this.cantAsteroides = cantAsteroides;
-		
+		texture = new Texture(Gdx.files.internal("Ocean.png"));
 		batch = game.getBatch();
 		camera = new OrthographicCamera();	
 		camera.setToOrtho(false, 800, 640);
@@ -82,6 +85,8 @@ public class PantallaJuego implements Screen {
 	public void render(float delta) {
 		  Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
           batch.begin();
+          batch.draw(texture, 0, yOcean, 1200, 800);
+          yOcean--;
 		  dibujaEncabezado();
 	      if (!nave.estaHerido()) {
 		      // colisiones entre balas y asteroides y su destruccion  
