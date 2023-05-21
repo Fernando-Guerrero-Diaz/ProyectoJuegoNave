@@ -25,6 +25,7 @@ public class Nave4 {
     private int tiempoHerido;
     private float rotacion =0.0f;
     private float max=5;
+    private float velocidad=0.0f;
     
     public Nave4(int x, int y, Texture tx, Sound soundChoque, Texture txBala, Sound soundBala) {
     	sonidoHerido = soundChoque;
@@ -41,31 +42,26 @@ public class Nave4 {
         float y =  spr.getY();
         if (!herido) {
 	        // que se mueva con teclado
-        	/*
-	        if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) xVel--;
-	        if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) xVel++;
-        	if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) yVel--;     
-	        if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) yVel++;
-        	*/
-	        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) spr.setRotation(++rotacion);
-	        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) spr.setRotation(--rotacion);
-	        
-	        if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-	        	xVel -=Math.sin(Math.toRadians(rotacion));
-	        	
-	        	yVel +=Math.cos(Math.toRadians(rotacion));
-	        	
-	        	System.out.println(rotacion+" - "+Math.sin(Math.toRadians(rotacion))+" - "+Math.cos(Math.toRadians(rotacion))) ;    
+
+	        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.DOWN)) rotacion = 135.0f;
+	        else if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.UP)) rotacion = 45.0f;
+	        else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.UP)) rotacion = 315.0f;
+	        else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.DOWN)) rotacion = 225.0f;
+	        else if (Gdx.input.isKeyPressed(Input.Keys.UP)) rotacion = 0.0f;
+	        else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) rotacion = 90.0f;
+	        else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) rotacion = 180.0f;
+	        else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) rotacion = 270.0f;
+	        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.DOWN)) velocidad = velocidad + 0.3f;
+	        else {
+	        	if (velocidad>0)
+	        	velocidad = velocidad - 0.20f;
+	        	else velocidad = 0.0f;
 	        }
-	        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)){
-	        	xVel +=Math.sin(Math.toRadians(rotacion));
-	        	yVel -=Math.cos(Math.toRadians(rotacion));
-	        	     
-	        }
-	        if (xVel>max) xVel=max;
-	        if (yVel>max) yVel=max;
-	        if (xVel<-max) xVel=-max;
-	        if (yVel<-max) yVel=-max;
+
+	        if (velocidad>max) velocidad = max;
+	        xVel =(float) ( velocidad * -Math.sin(Math.toRadians(rotacion)));
+	        yVel =(float) ( velocidad * Math.cos(Math.toRadians(rotacion)));
+	        spr.setRotation(rotacion);
 	        // que se mantenga dentro de los bordes de la ventana
 	        if (x+xVel < 0 || x+xVel+spr.getWidth() > Gdx.graphics.getWidth())
 	        	xVel*=-1;
@@ -98,6 +94,7 @@ public class Nave4 {
     public boolean checkCollision(Ball2 b) {
         if(!herido && b.getArea().overlaps(spr.getBoundingRectangle())){
         	// rebote
+        	/*
             if (xVel ==0) xVel += b.getXSpeed()/2;
             if (b.getXSpeed() ==0) b.setXSpeed(b.getXSpeed() + (int)xVel/2);
             xVel = - xVel;
@@ -107,6 +104,7 @@ public class Nave4 {
             if (b.getySpeed() ==0) b.setySpeed(b.getySpeed() + (int)yVel/2);
             yVel = - yVel;
             b.setySpeed(- b.getySpeed());
+            */
             // despegar sprites
       /*      int cont = 0;
             while (b.getArea().overlaps(spr.getBoundingRectangle()) && cont<xVel) {
