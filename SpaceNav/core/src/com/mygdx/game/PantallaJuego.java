@@ -25,6 +25,8 @@ public class PantallaJuego implements Screen {
 	private int velXAsteroides; 
 	private int velYAsteroides; 
 	private int cantAsteroides;
+	private int cantObstaculos;
+	private int velYroca;
 	private Texture texture;
 	private int yOcean=0;
 	private int yOcean2;
@@ -33,16 +35,21 @@ public class PantallaJuego implements Screen {
 	private  ArrayList<Ball2> balls1 = new ArrayList<>();
 	private  ArrayList<Ball2> balls2 = new ArrayList<>();
 	private  ArrayList<Bullet> balas = new ArrayList<>();
+	private ArrayList<Roca> roca1 = new ArrayList<>();
+	private ArrayList<Roca> roca2 = new ArrayList<>();
+	
 
 
 	public PantallaJuego(SpaceNavigation game, int ronda, int vidas, int score,  
-			int velXAsteroides, int velYAsteroides, int cantAsteroides) {
+			int velXAsteroides, int velYAsteroides, int cantAsteroides, int cantObstaculos,int velYroca) {
 		this.game = game;
 		this.ronda = ronda;
 		this.score = score;
 		this.velXAsteroides = velXAsteroides;
 		this.velYAsteroides = velYAsteroides;
 		this.cantAsteroides = cantAsteroides;
+		this.cantObstaculos = cantObstaculos;
+		this.velYroca = velYroca;
 		texture = new Texture(Gdx.files.internal("Ocean.png"));
 		batch = game.getBatch();
 		camera = new OrthographicCamera();	
@@ -53,7 +60,7 @@ public class PantallaJuego implements Screen {
 		gameMusic = Gdx.audio.newMusic(Gdx.files.internal("piano-loops.wav")); //
 		
 		gameMusic.setLooping(true);
-		gameMusic.setVolume(0.5f);
+		gameMusic.setVolume(0.35f);
 		gameMusic.play();
 		
 	    // cargar imagen de la nave, 64x64   
@@ -72,6 +79,15 @@ public class PantallaJuego implements Screen {
 	  	    balls1.add(bb);
 	  	    balls2.add(bb);
 	  	}
+	    //crear rocas 
+	    for (int i = 0; i < cantObstaculos; i++) {
+	        Roca b2 = new Roca(r.nextInt((int)Gdx.graphics.getWidth()),
+	  	            20+r.nextInt((int)Gdx.graphics.getHeight()-50),
+	  	            250, 0, velYAsteroides+r.nextInt(1), 
+	  	            new Texture(Gdx.files.internal("rocaObstaculo.png")));	   
+	  	    roca1.add(b2);
+	  	    roca2.add(b2);
+	    }
 	}
     
 	public void dibujaEncabezado() {
@@ -94,8 +110,9 @@ public class PantallaJuego implements Screen {
 		            Bullet b = balas.get(i);
 		            b.update();
 		            for (int j = 0; j < balls1.size(); j++) {    
-		              if (b.checkCollision(balls1.get(j))) {          
-		            	 explosionSound.play();
+		              if (b.checkCollision(balls1.get(j))) {
+		            	  //puedes ajustar el sonido colocando entre play un float de entre 0 a 1, serian los %
+		            	 explosionSound.play(0.15f);
 		            	 balls1.remove(j);
 		            	 balls2.remove(j);
 		            	 j--;
@@ -112,6 +129,10 @@ public class PantallaJuego implements Screen {
 		      //actualizar movimiento de asteroides dentro del area
 		      for (Ball2 ball : balls1) {
 		          ball.update();
+		      }
+		      for(Roca roca : roca1) {
+		    	  roca.update();
+		    	  
 		      }
 		      //colisiones entre asteroides y sus rebotes  
 		      for (int i=0;i<balls1.size();i++) {
@@ -142,7 +163,10 @@ public class PantallaJuego implements Screen {
 	            	 i--;
               }   	  
   	        }
-	      
+	      for (int i = 0; i < roca1.size(); i++) {
+	    	    Roca b=roca1.get(i);
+	    	    b.draw(batch);
+	      }
 	      if (nave.estaDestruido()) {
   			if (score > game.getHighScore())
   				game.setHighScore(score);
@@ -155,7 +179,7 @@ public class PantallaJuego implements Screen {
 	      //nivel completado
 	      if (balls1.size()==0) {
 			Screen ss = new PantallaJuego(game,ronda+1, nave.getVidas(), score, 
-					velXAsteroides+3, velYAsteroides+3, cantAsteroides+10);
+					velXAsteroides+3, velYAsteroides+3, cantAsteroides+10,cantObstaculos+1,velYroca+2);
 			ss.resize(1200, 800);
 			game.setScreen(ss);
 			dispose();
