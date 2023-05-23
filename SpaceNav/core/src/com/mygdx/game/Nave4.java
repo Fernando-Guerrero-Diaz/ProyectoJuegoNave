@@ -29,7 +29,7 @@ public class Nave4 {
     private float velocidad=0.0f;
     private int tiempoAutoDireccion=0;
     private float rotVel=5.0f;
-    
+    private int cooldownDisparo=0;
     public Nave4(int x, int y, Texture tx, Sound soundChoque, Texture txBala, Sound soundBala) {
     	sonidoHerido = soundChoque;
     	this.soundBala = soundBala;
@@ -58,26 +58,32 @@ public class Nave4 {
 	        		|| Gdx.input.isKeyPressed(Input.Keys.LEFT) 
 	        		|| Gdx.input.isKeyPressed(Input.Keys.UP) 
 	        		|| Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-		        if ((velocidad > 1) &&
+		        if ((velocidad > 2) &&
 		        		((rotacion > direccion+135 && rotacion < direccion +225) ||
 		        		 (rotacion > direccion-135 && rotacion < direccion -225))) {
 		        	velocidad = velocidad -0.25f;
+		        	rotVel=2.5f;
 		        }
+		        else rotVel=5.0f;
+		        if ((rotacion>direccion-2.5f)&&(rotacion<direccion+2.5f)) {
+		        	rotacion = direccion;
+		        	rotVel=0.0f;
+		        }
+		        else if (rotacion < direccion) {
+		        	if (rotacion < direccion -180) rotacion=rotacion-rotVel;
+		        	else rotacion=rotacion+rotVel;
+		        	}
 		        else {
-		        	if (rotacion < direccion) {
-		        		if (rotacion < direccion -180) rotacion=rotacion-rotVel;
-		        		else rotacion=rotacion+rotVel;
-		        		}
-		        	else {
-		        		if(rotacion < direccion + 180) rotacion=rotacion-rotVel;
-		        		else rotacion=rotacion+rotVel;
-		        		}
-		        	if ((rotacion < direccion +45 && rotacion > direccion -45) ||
-		        		(rotacion < direccion -315 && rotacion > direccion -405) ||
-		        		(rotacion < direccion +405 && rotacion > direccion +315)) {
+		        	if(rotacion < direccion + 180) rotacion=rotacion-rotVel;
+		        	else rotacion=rotacion+rotVel;
+		        	}
+		        if ((direccion==rotacion)||
+		        	(rotacion < direccion +45 && rotacion > direccion -45) ||
+		        	(rotacion < direccion -315 && rotacion > direccion -405) ||
+		        	(rotacion < direccion +405 && rotacion > direccion +315)) {
 		        		velocidad = velocidad + 0.3f;
 		        	}
-		        }
+		        
 
 	        	tiempoAutoDireccion=40;
 	        }
@@ -115,14 +121,17 @@ public class Nave4 {
  		 }
         // disparo
         
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {         
-          Bullet  balaL = new Bullet(spr.getX()+spr.getWidth()/2,spr.getY()+ spr.getHeight(),(int)(-10*Math.cos(Math.toRadians(rotacion))),(int)(-10*Math.sin(Math.toRadians(rotacion))),txBala);
-          Bullet  balaR = new Bullet(spr.getX()+spr.getWidth()/2,spr.getY()+ spr.getHeight(),(int)(10*Math.cos(Math.toRadians(rotacion))),(int)(10*Math.sin(Math.toRadians(rotacion))),txBala);
-
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)&&cooldownDisparo==0) {         
+          Bullet  balaL = new Bullet(spr.getX()+spr.getWidth()/2,spr.getY()+ spr.getHeight(),(int)(-7*Math.cos(Math.toRadians(rotacion))),(int)(-7*Math.sin(Math.toRadians(rotacion))),txBala);
+          Bullet  balaR = new Bullet(spr.getX()+spr.getWidth()/2,spr.getY()+ spr.getHeight(),(int)(7*Math.cos(Math.toRadians(rotacion))),(int)(7*Math.sin(Math.toRadians(rotacion))),txBala);
+          cooldownDisparo=100;
           juego.agregarBala(balaL);
           juego.agregarBala(balaR);
 	      soundBala.play();
         }
+        
+        if (cooldownDisparo>0)cooldownDisparo--;
+        if(cooldownDisparo<0)cooldownDisparo=0;
        
     }
       

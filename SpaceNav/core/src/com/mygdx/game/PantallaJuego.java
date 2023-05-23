@@ -68,7 +68,7 @@ public class PantallaJuego implements Screen {
 	    // cargar imagen de la nave, 64x64   
 	    nave = new Nave4(Gdx.graphics.getWidth()/2-50,30,new Texture(Gdx.files.internal("MainShip3.png")),
 	    				Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")), 
-	    				new Texture(Gdx.files.internal("Rocket2.png")), 
+	    				new Texture(Gdx.files.internal("CannonballGrey.png")), 
 	    				Gdx.audio.newSound(Gdx.files.internal("pop-sound.mp3"))); 
         nave.setVidas(vidas);
         //crear asteroides
@@ -85,7 +85,7 @@ public class PantallaJuego implements Screen {
 	    for (int i = 0; i < cantObstaculos; i++) {
 	        Roca b2 = new Roca(r.nextInt((int)Gdx.graphics.getWidth()),
 	  	            20+r.nextInt((int)Gdx.graphics.getHeight()-50),
-	  	            250, 0, velYAsteroides+r.nextInt(1), 
+	  	            250, 0, -velYAsteroides+r.nextInt(1), 
 	  	            new Texture(Gdx.files.internal("rocaObstaculo.png")));	   
 	  	    roca1.add(b2);
 	  	    roca2.add(b2);
