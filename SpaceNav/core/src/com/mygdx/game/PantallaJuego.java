@@ -27,8 +27,8 @@ public class PantallaJuego implements Screen {
 	private int cantAsteroides;
 	private int cantObstaculos;
 	private int velYroca;
-	private Texture ocean;
-	private Texture ocean2;
+	private Texture texture;
+	private Texture texture1;
 	private int yOcean=0;
 	private int yOcean2=800;
 	
@@ -51,8 +51,8 @@ public class PantallaJuego implements Screen {
 		this.cantAsteroides = cantAsteroides;
 		this.cantObstaculos = cantObstaculos;
 		this.velYroca = velYroca;
-		ocean = new Texture(Gdx.files.internal("Ocean.png"));
-		ocean2 = new Texture(Gdx.files.internal("Ocean.png"));
+		texture = new Texture(Gdx.files.internal("Ocean.png"));
+		texture1 = new Texture(Gdx.files.internal("Ocean.png"));
 		batch = game.getBatch();
 		camera = new OrthographicCamera();	
 		camera.setToOrtho(false, 800, 640);
@@ -103,9 +103,9 @@ public class PantallaJuego implements Screen {
 	public void render(float delta) {
 		  Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
           batch.begin();
-          batch.draw(ocean, 0, yOcean, 1200, 800);
+          batch.draw(texture, 0, yOcean, 1200, 800);
           yOcean--;
-          batch.draw(ocean2, 0, yOcean2, 1200, 800);
+          batch.draw(texture1, 0, yOcean2, 1200, 800);
           yOcean2--;
           if(yOcean==-800) {
         	  yOcean=800;
@@ -122,7 +122,7 @@ public class PantallaJuego implements Screen {
 		            for (int j = 0; j < balls1.size(); j++) {    
 		              if (b.checkCollision(balls1.get(j))) {
 		            	  //puedes ajustar el sonido colocando entre play un float de entre 0 a 1, serian los %
-		            	 explosionSound.play (0.15f);
+		            	 explosionSound.play(0.15f);
 		            	 balls1.remove(j);
 		            	 balls2.remove(j);
 		            	 j--;
