@@ -59,10 +59,10 @@ public class PantallaJuego implements Screen {
 		//inicializar assets; musica de fondo y efectos de sonido
 		explosionSound = Gdx.audio.newSound(Gdx.files.internal("explosion.ogg"));
 		explosionSound.setVolume(1,0.5f);
-		gameMusic = Gdx.audio.newMusic(Gdx.files.internal("piano-loops.wav")); //
+		gameMusic = Gdx.audio.newMusic(Gdx.files.internal("Navegar.mp3")); //
 		
 		gameMusic.setLooping(true);
-		gameMusic.setVolume(0.35f);
+		gameMusic.setVolume(0.20f);
 		gameMusic.play();
 		
 	    // cargar imagen de la nave, 64x64   
