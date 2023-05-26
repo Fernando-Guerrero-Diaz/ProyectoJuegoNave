@@ -39,7 +39,7 @@ public class Nave4 {
     	spr = new Sprite(tx);
     	spr.setPosition(x, y);
     	//spr.setOriginCenter();
-    	spr.setBounds(x, y, 45, 45);
+    	spr.setBounds(x, y, 90, 90);
 
     }
     public void draw(SpriteBatch batch, PantallaJuego juego){
