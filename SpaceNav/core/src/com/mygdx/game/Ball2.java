@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 
 
-public class Ball2 {
+public class Ball2  implements Obstaculo {
 	private int x;
     private int y;
     private int xSpeed;
@@ -15,6 +15,7 @@ public class Ball2 {
     private Sprite spr;
     private int exitmargen=50;
     private int entermargen=10;
+    private int daño = 5;
 
     public Ball2(int x, int y, int size, int xSpeed, int ySpeed, Texture tx) {
     	spr = new Sprite(tx);
@@ -86,5 +87,12 @@ public class Ball2 {
 		this.ySpeed = ySpeed;
 	}
 	
+	public int getDaño() {
+		return daño;
+	}
+	
+	public boolean esDestructible() {
+		return true;
+	}
     
 }

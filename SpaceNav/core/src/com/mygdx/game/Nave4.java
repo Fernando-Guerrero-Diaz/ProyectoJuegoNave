@@ -13,7 +13,7 @@ import com.badlogic.gdx.math.MathUtils;
 public class Nave4 {
 	
 	private boolean destruida = false;
-    private int vidas = 3;
+    private int vidas = 50;
     private float xVel = 0;
     private float yVel = 0;
     private Sprite spr;
@@ -23,12 +23,14 @@ public class Nave4 {
     private boolean herido = false;
     private int tiempoHeridoMax=50;
     private int tiempoHerido;
+    
     private float rotacion =0.0f;
     private float direccion = 0.0f;
     private float max=5;
     private float velocidad=0.0f;
     private int tiempoAutoDireccion=0;
     private float rotVel=5.0f;
+    
     private int cooldownDisparo=0;
     public Nave4(int x, int y, Texture tx, Sound soundChoque, Texture txBala, Sound soundBala) {
     	sonidoHerido = soundChoque;
@@ -135,33 +137,37 @@ public class Nave4 {
        
     }
       
-    public boolean checkCollision(Ball2 b) {
-        if(!herido && b.getArea().overlaps(spr.getBoundingRectangle())){
-        	// rebote
-        	/*
-            if (xVel ==0) xVel += b.getXSpeed()/2;
-            if (b.getXSpeed() ==0) b.setXSpeed(b.getXSpeed() + (int)xVel/2);
-            xVel = - xVel;
-            b.setXSpeed(-b.getXSpeed());
-            
-            if (yVel ==0) yVel += b.getySpeed()/2;
-            if (b.getySpeed() ==0) b.setySpeed(b.getySpeed() + (int)yVel/2);
-            yVel = - yVel;
-            b.setySpeed(- b.getySpeed());
-            */
-            // despegar sprites
-      /*      int cont = 0;
-            while (b.getArea().overlaps(spr.getBoundingRectangle()) && cont<xVel) {
-               spr.setX(spr.getX()+Math.signum(xVel));
-            }   */
-        	//actualizar vidas y herir
-            vidas--;
-            herido = true;
-  		    tiempoHerido=tiempoHeridoMax;
-  		    sonidoHerido.play();
-            if (vidas<=0) 
-          	    destruida = true; 
-            return true;
+    public boolean checkCollision(Elemento b) {
+    	if (b instanceof Obstaculo) {
+
+	        if(!herido && b.getArea().overlaps(spr.getBoundingRectangle())){
+	        	Obstaculo o = (Obstaculo) b;
+	        	// rebote
+	        	/*
+	            if (xVel ==0) xVel += b.getXSpeed()/2;
+	            if (b.getXSpeed() ==0) b.setXSpeed(b.getXSpeed() + (int)xVel/2);
+	            xVel = - xVel;
+	            b.setXSpeed(-b.getXSpeed());
+	            
+	            if (yVel ==0) yVel += b.getySpeed()/2;
+	            if (b.getySpeed() ==0) b.setySpeed(b.getySpeed() + (int)yVel/2);
+	            yVel = - yVel;
+	            b.setySpeed(- b.getySpeed());
+	            */
+	            // despegar sprites
+	      /*      int cont = 0;
+	            while (b.getArea().overlaps(spr.getBoundingRectangle()) && cont<xVel) {
+	               spr.setX(spr.getX()+Math.signum(xVel));
+	            }   */
+	        	//actualizar vidas y herir
+	            vidas=vidas- o.getDaño();
+	            herido = true;
+	  		    tiempoHerido=tiempoHeridoMax;
+	  		    sonidoHerido.play();
+	            if (vidas<=0) 
+	          	    destruida = true; 
+	            return true;
+        	}
         }
         return false;
     }

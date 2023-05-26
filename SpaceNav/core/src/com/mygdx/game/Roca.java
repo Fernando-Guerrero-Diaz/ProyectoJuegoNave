@@ -6,13 +6,14 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 
-public class Roca {
+public class Roca implements Obstaculo{
 	private int x;
 	private int y;
 	private int xSpeed;
 	private int ySpeed;
 	private Sprite spr;
 	private int enYsa=30;
+	private int daño = 10;
 	
     public Roca(int x, int y, int size, int xSpeed, int ySpeed, Texture tx) {
     	spr = new Sprite(tx);
@@ -79,5 +80,13 @@ public class Roca {
 	}
 	public void setySpeed(int ySpeed) {
 		this.ySpeed = ySpeed;
+	}
+	
+	public int getDaño() {
+		return daño;
+	}
+	
+	public boolean esDestructible() {
+		return false;
 	}
 }
