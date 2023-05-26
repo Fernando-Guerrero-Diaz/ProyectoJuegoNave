@@ -27,8 +27,8 @@ public class PantallaJuego implements Screen {
 	private int cantAsteroides;
 	private int cantObstaculos;
 	private int velYroca;
-	private Texture texture;
-	private Texture texture1;
+	private Texture ocean;
+	private Texture ocean2;
 	private int yOcean=0;
 	private int yOcean2=800;
 	
@@ -51,8 +51,8 @@ public class PantallaJuego implements Screen {
 		this.cantAsteroides = cantAsteroides;
 		this.cantObstaculos = cantObstaculos;
 		this.velYroca = velYroca;
-		texture = new Texture(Gdx.files.internal("Ocean.png"));
-		texture1 = new Texture(Gdx.files.internal("Ocean.png"));
+		ocean = new Texture(Gdx.files.internal("Ocean.png"));
+		ocean2 = new Texture(Gdx.files.internal("Ocean.png"));
 		batch = game.getBatch();
 		camera = new OrthographicCamera();	
 		camera.setToOrtho(false, 800, 640);
@@ -103,9 +103,9 @@ public class PantallaJuego implements Screen {
 	public void render(float delta) {
 		  Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
           batch.begin();
-          batch.draw(texture, 0, yOcean, 1200, 800);
+          batch.draw(ocean, 0, yOcean, 1200, 800);
           yOcean--;
-          batch.draw(texture1, 0, yOcean2, 1200, 800);
+          batch.draw(ocean2, 0, yOcean2, 1200, 800);
           yOcean2--;
           if(yOcean==-800) {
         	  yOcean=800;
