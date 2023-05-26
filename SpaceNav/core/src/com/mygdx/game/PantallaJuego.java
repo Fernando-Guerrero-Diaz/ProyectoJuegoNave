@@ -38,7 +38,7 @@ public class PantallaJuego implements Screen {
 	private  ArrayList<Bullet> balas = new ArrayList<>();
 	private ArrayList<Roca> roca1 = new ArrayList<>();
 	private ArrayList<Roca> roca2 = new ArrayList<>();
-	
+	private Tesoro tesoro;
 
 
 	public PantallaJuego(SpaceNavigation game, int ronda, int vidas, int score,  
@@ -90,6 +90,12 @@ public class PantallaJuego implements Screen {
 	  	    roca1.add(b2);
 	  	    roca2.add(b2);
 	    }
+	    
+	    //crear tesoro
+	    tesoro = new Tesoro(r.nextInt((int)Gdx.graphics.getWidth()),
+  	            50+r.nextInt((int)Gdx.graphics.getHeight()-50),
+  	            20+r.nextInt(10), velXAsteroides+r.nextInt(4), velYAsteroides+r.nextInt(4), 
+  	            new Texture(Gdx.files.internal("Tesoro.png")));	
 	}
     
 	public void dibujaEncabezado() {
@@ -144,6 +150,8 @@ public class PantallaJuego implements Screen {
 		    	  roca.update();
 		    	  
 		      }
+		      if (tesoro.estaActivo()) tesoro.update();
+		      
 		      //colisiones entre asteroides y sus rebotes  
 		      for (int i=0;i<balls1.size();i++) {
 		    	Ball2 ball1 = balls1.get(i);   
@@ -171,12 +179,17 @@ public class PantallaJuego implements Screen {
 	            	 balls1.remove(i);
 	            	 balls2.remove(i);
 	            	 i--;
-              }   	  
+	              }   	  
   	        }
 	      for (int i = 0; i < roca1.size(); i++) {
 	    	    Roca b=roca1.get(i);
 	    	    b.draw(batch);
 	      }
+	      if (tesoro.estaActivo()) {
+	    	  tesoro.draw(batch);
+	    	  if(nave.checkCollision(tesoro)) score+=tesoro.getPuntos();
+	      }
+	      
 	      if (nave.estaDestruido()) {
   			if (score > game.getHighScore())
   				game.setHighScore(score);
@@ -189,7 +202,7 @@ public class PantallaJuego implements Screen {
 	      //nivel completado
 	      if (balls1.size()==0) {
 			Screen ss = new PantallaJuego(game,ronda+1, nave.getVidas(), score, 
-					velXAsteroides+3, velYAsteroides+3, cantAsteroides+10,cantObstaculos+1,velYroca+2);
+					velXAsteroides+1, velYAsteroides+1, cantAsteroides+1,cantObstaculos+1,velYroca);
 			ss.resize(1200, 800);
 			game.setScreen(ss);
 			dispose();

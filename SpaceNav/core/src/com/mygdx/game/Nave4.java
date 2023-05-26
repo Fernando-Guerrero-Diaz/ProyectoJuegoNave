@@ -168,6 +168,10 @@ public class Nave4 {
 	          	    destruida = true; 
 	            return true;
         	}
+
+        }
+        if (b instanceof Pickup) {
+        	if(b.getArea().overlaps(spr.getBoundingRectangle())) return true;
         }
         return false;
     }
