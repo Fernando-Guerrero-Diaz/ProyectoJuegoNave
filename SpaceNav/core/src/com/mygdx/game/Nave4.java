@@ -164,7 +164,7 @@ public class Nave4 {
 	            herido = true;
 	  		    tiempoHerido=tiempoHeridoMax;
 	  		    sonidoHerido.play();
-	            if (vidas<=0) 
+	            if (vidas<=45) 
 	          	    destruida = true; 
 	            return true;
         	}

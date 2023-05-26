@@ -3,7 +3,9 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 
@@ -11,12 +13,21 @@ public class PantallaGameOver implements Screen {
 
 	private SpaceNavigation game;
 	private OrthographicCamera camera;
+	private Music Final;
+	private Texture Adios;
+
 
 	public PantallaGameOver(SpaceNavigation game) {
 		this.game = game;
         
+		Adios = new Texture(Gdx.files.internal("Adios.jpg"));
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1200, 800);
+		Final = Gdx.audio.newMusic(Gdx.files.internal("Final.mp3"));
+		
+		Final.setLooping(true);
+		Final.setVolume(0.20f);
+		Final.play();
 	}
 
 	@Override
@@ -27,8 +38,9 @@ public class PantallaGameOver implements Screen {
 		game.getBatch().setProjectionMatrix(camera.combined);
 
 		game.getBatch().begin();
-		game.getFont().draw(game.getBatch(), "Game Over !!! ", 120, 400,400,1,true);
-		game.getFont().draw(game.getBatch(), "Pincha en cualquier lado para reiniciar ...", 100, 300);
+        game.getBatch().draw(Adios, 0, 0, 1200, 800);
+		game.getFont().draw(game.getBatch(), "¡Tu aventura ha terminado!\n ¿Lo volveras intentar?", 400, 500,400,1,true);
+		game.getFont().draw(game.getBatch(), "Pincha en cualquier lado para reiniciar ...", 400, 300);
 	
 		game.getBatch().end();
 
@@ -44,6 +56,7 @@ public class PantallaGameOver implements Screen {
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
+		Final.play();
 		
 	}
 
@@ -74,7 +87,7 @@ public class PantallaGameOver implements Screen {
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-		
+		this.Final.dispose();		
 	}
    
 }
