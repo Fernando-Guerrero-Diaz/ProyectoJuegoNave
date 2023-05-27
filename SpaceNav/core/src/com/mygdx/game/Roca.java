@@ -1,5 +1,7 @@
 package com.mygdx.game;
 
+import java.util.Random;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -35,13 +37,15 @@ public class Roca implements Obstaculo{
     public void update() {
         x += getXSpeed();
         y += getySpeed();
-        
+        Random r = new Random();
         if ((x+getXSpeed()< -enYsa))
         	x=Gdx.graphics.getWidth()+enYsa;        	
         else if(x+getXSpeed()+spr.getWidth() > Gdx.graphics.getWidth()+enYsa*2)
         	x=-enYsa ;        
-        if (y+getySpeed() < -enYsa)
+        if (y+getySpeed() < -enYsa) {
         	y=Gdx.graphics.getHeight()+enYsa;
+        	x=50+r.nextInt((int)Gdx.graphics.getHeight()-50);
+        }
         if(y+getySpeed()+spr.getHeight() > Gdx.graphics.getHeight()+enYsa*2)
         	y=Gdx.graphics.getHeight();
         spr.setPosition(x, y);
