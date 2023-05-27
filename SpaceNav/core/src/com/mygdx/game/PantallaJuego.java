@@ -31,6 +31,7 @@ public class PantallaJuego implements Screen {
 	private Texture ocean2;
 	private int yOcean=0;
 	private int yOcean2=800;
+	//private Texture Barra;
 	
 	private Nave4 nave;
 	private  ArrayList<Ball2> balls1 = new ArrayList<>();
@@ -51,11 +52,13 @@ public class PantallaJuego implements Screen {
 		this.cantAsteroides = cantAsteroides;
 		this.cantObstaculos = cantObstaculos;
 		this.velYroca = velYroca;
+		//Barra= new Texture(Gdx.files.internal("Barra.png"));
 		ocean = new Texture(Gdx.files.internal("Ocean.png"));
 		ocean2 = new Texture(Gdx.files.internal("Ocean.png"));
 		batch = game.getBatch();
 		camera = new OrthographicCamera();	
 		camera.setToOrtho(false, 800, 640);
+		//Ninepatch bar = new NinePatch(new TextureRegion(Barra, x, y, width, height), left, right, top, bottom);
 		//inicializar assets; musica de fondo y efectos de sonido
 		explosionSound = Gdx.audio.newSound(Gdx.files.internal("explosion.ogg"));
 		explosionSound.setVolume(1,0.5f);
@@ -163,6 +166,17 @@ public class PantallaJuego implements Screen {
 		          }
 		        }
 		      } 
+		      
+		      /*for (int i=0;i<roca1.size();i++) {
+		    	Roca ball1 = roca1.get(i);   
+		        for (int j=0;j<roca2.size();j++) {
+		          Roca roca2 = roca2.get(j); 
+		          if (i<j) {
+		        	  roca1.checkCollision(roca2);
+		     
+		          }
+		        }
+		      }*/ 
 	      }
 	      //dibujar balas
 	     for (Bullet b : balas) {       

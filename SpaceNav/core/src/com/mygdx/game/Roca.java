@@ -38,12 +38,12 @@ public class Roca implements Obstaculo{
         
         if ((x+getXSpeed()< -enYsa))
         	x=Gdx.graphics.getWidth()+enYsa;        	
-        else if(x+getXSpeed()+spr.getWidth() > Gdx.graphics.getWidth()-enYsa*2)
+        else if(x+getXSpeed()+spr.getWidth() > Gdx.graphics.getWidth()+enYsa*2)
         	x=-enYsa ;        
-        if (y+getySpeed() < 0)
+        if (y+getySpeed() < -enYsa)
         	y=Gdx.graphics.getHeight()+enYsa;
-        if(y+getySpeed()+spr.getHeight() > Gdx.graphics.getHeight()-enYsa*2)
-        	y=-enYsa;
+        if(y+getySpeed()+spr.getHeight() > Gdx.graphics.getHeight()+enYsa*2)
+        	y=Gdx.graphics.getHeight();
         spr.setPosition(x, y);
     }
     public Rectangle getArea() {
@@ -53,7 +53,7 @@ public class Roca implements Obstaculo{
     	spr.draw(batch);
     }
     
- /*   public void checkCollision(roca b2) {
+ /*   public void checkCollision(roca2 b2) {
         if(spr.getBoundingRectangle().overlaps(b2.spr.getBoundingRectangle())){
         	// rebote de asteroides si lo quitas se transpasas
             if (getXSpeed() ==0) setXSpeed(getXSpeed() + b2.getXSpeed()/2);
