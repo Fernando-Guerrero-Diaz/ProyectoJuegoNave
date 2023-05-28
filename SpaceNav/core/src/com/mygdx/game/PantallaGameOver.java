@@ -13,21 +13,21 @@ public class PantallaGameOver implements Screen {
 
 	private SpaceNavigation game;
 	private OrthographicCamera camera;
-	private Music Final;
-	private Texture Adios;
+	private Music fin;
+	private Texture adios;
 
 
 	public PantallaGameOver(SpaceNavigation game) {
 		this.game = game;
         
-		Adios = new Texture(Gdx.files.internal("Adios.jpg"));
+		adios = new Texture(Gdx.files.internal("Adios.jpg"));
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1200, 800);
-		Final = Gdx.audio.newMusic(Gdx.files.internal("Final.mp3"));
+		fin = Gdx.audio.newMusic(Gdx.files.internal("Final.mp3"));
 		
-		Final.setLooping(true);
-		Final.setVolume(0.20f);
-		Final.play();
+		fin.setLooping(true);
+		fin.setVolume(0.20f);
+		fin.play();
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class PantallaGameOver implements Screen {
 		game.getBatch().setProjectionMatrix(camera.combined);
 
 		game.getBatch().begin();
-        game.getBatch().draw(Adios, 0, 0, 1200, 800);
+        game.getBatch().draw(adios, 0, 0, 1200, 800);
 		game.getFont().draw(game.getBatch(), "¡Tu aventura ha terminado!\n ¿Lo volveras intentar?", 400, 500,400,1,true);
 		game.getFont().draw(game.getBatch(), "Pincha en cualquier lado para reiniciar ...", 400, 300);
 	
@@ -56,7 +56,7 @@ public class PantallaGameOver implements Screen {
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		Final.play();
+		fin.play();
 		
 	}
 
@@ -87,7 +87,7 @@ public class PantallaGameOver implements Screen {
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-		this.Final.dispose();		
+		this.fin.dispose();		
 	}
    
 }
