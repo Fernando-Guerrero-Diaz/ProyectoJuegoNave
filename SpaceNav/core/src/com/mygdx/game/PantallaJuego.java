@@ -232,6 +232,14 @@ public class PantallaJuego implements Screen {
   			dispose();
   		  }
 		  dibujaEncabezado();
+		  if(ronda==2) {
+	    	  ocean = new Texture(Gdx.files.internal("newOcean.jpg"));
+	    	  ocean2 = new Texture(Gdx.files.internal("newOcean.jpg"));
+	      }
+	      else if(ronda==3) {
+	    	  ocean = new Texture(Gdx.files.internal("newOcean1.jpg"));
+	    	  ocean2 = new Texture(Gdx.files.internal("newOcean1.jpg"));
+	      }
 	      batch.end();
 	      //nivel completado
 	      if (balls1.size()==0) {
