@@ -37,6 +37,7 @@ public class Nave4 {
     private float rotAcc=0.2f;
     
     private int cooldownDisparo=0;
+    private int cooldownDano=0;
     public Nave4(int x, int y, Texture tx, Sound soundChoque, Texture txBala, Sound soundBala) {
     	sonidoHerido = soundChoque;
     	this.soundBala = soundBala;
@@ -107,6 +108,8 @@ public class Nave4 {
         
         if (cooldownDisparo>0)cooldownDisparo--;
         if(cooldownDisparo<0)cooldownDisparo=0;
+        if(cooldownDano>0)cooldownDano--;
+        if(cooldownDano<0)cooldownDano=0;
        
     }
     
@@ -172,6 +175,7 @@ public class Nave4 {
     
     
     public boolean checkCollision(Elemento b) {
+    	if(cooldownDano<=0) {
     	if (b instanceof Obstaculo) {
 
 	        if(!herido && b.getArea().overlaps(spr.getBoundingRectangle())){
@@ -196,19 +200,22 @@ public class Nave4 {
 	        	//actualizar vidas y herir
 	            vidas=vidas- o.getDaño();
 	            herido = true;
+	            cooldownDano=100;
 	  		    tiempoHerido=tiempoHeridoMax;
 	  		    sonidoHerido.play();
 	            if (vidas<=0) 
 	          	    destruida = true; 
 	            return true;
         	}
-
+	        
         }
         if (b instanceof Pickup) {
         	if(b.getArea().overlaps(spr.getBoundingRectangle())) return true;
         }
+    	}
         return false;
     }
+    	
     
     public boolean estaDestruido() {
        return !herido && destruida;
