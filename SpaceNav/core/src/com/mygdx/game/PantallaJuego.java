@@ -31,7 +31,8 @@ public class PantallaJuego implements Screen {
 	private Texture ocean2;
 	private int yOcean=0;
 	private int yOcean2=800;
-	//private Texture Barra;
+	private Texture barra;
+	private Texture dinabarra;
 	
 	private Nave4 nave;
 	private  ArrayList<Ball2> balls1 = new ArrayList<>();
@@ -52,13 +53,13 @@ public class PantallaJuego implements Screen {
 		this.cantAsteroides = cantAsteroides;
 		this.cantObstaculos = cantObstaculos;
 		this.velYroca = velYroca;
-		//Barra= new Texture(Gdx.files.internal("Barra.png"));
+		barra= new Texture(Gdx.files.internal("Barra.png"));
+		dinabarra= new Texture(Gdx.files.internal("PdeVida4.png"));
 		ocean = new Texture(Gdx.files.internal("Ocean.png"));
 		ocean2 = new Texture(Gdx.files.internal("Ocean.png"));
 		batch = game.getBatch();
 		camera = new OrthographicCamera();	
 		camera.setToOrtho(false, 800, 640);
-		//Ninepatch bar = new NinePatch(new TextureRegion(Barra, x, y, width, height), left, right, top, bottom);
 		//inicializar assets; musica de fondo y efectos de sonido
 		explosionSound = Gdx.audio.newSound(Gdx.files.internal("explosion.ogg"));
 		explosionSound.setVolume(1,0.5f);
@@ -102,11 +103,19 @@ public class PantallaJuego implements Screen {
 	}
     
 	public void dibujaEncabezado() {
-		CharSequence str = "Vidas: "+nave.getVidas()+" Ronda: "+ronda;
+		int x=405,ac=x;
+		//CharSequence str = "Vidas: "+nave.getVidas()+" Ronda: "+ronda;
 		game.getFont().getData().setScale(2f);		
-		game.getFont().draw(batch, str, 10, 30);
+		//game.getFont().draw(batch, str, 10, 30);
 		game.getFont().draw(batch, "Score:"+this.score, Gdx.graphics.getWidth()-150, 30);
 		game.getFont().draw(batch, "HighScore:"+game.getHighScore(), Gdx.graphics.getWidth()/2-100, 30);
+		//game.getBatch().draw(dinabarra,18,7,405,56);
+		game.getBatch().draw(barra, 0, 0, 458, 78);
+		//(nave.estaHerido()
+			ac=x*nave.getVidas()/50;
+			if(ac<0) ac=0;
+			game.getBatch().draw(dinabarra,18,7,ac,56);
+			game.getBatch().draw(barra, 0, 0, 458, 78);
 	}
 	@Override
 	public void render(float delta) {
@@ -122,7 +131,6 @@ public class PantallaJuego implements Screen {
           if(yOcean2==-800) {
         	  yOcean2=800;
           }
-		  dibujaEncabezado();
 	      if (!nave.estaHerido()) {
 		      // colisiones entre balas y asteroides y su destruccion  
 	    	  for (int i = 0; i < balas.size(); i++) {
@@ -168,15 +176,14 @@ public class PantallaJuego implements Screen {
 		      } 
 		      
 		      /*for (int i=0;i<roca1.size();i++) {
-		    	Roca ball1 = roca1.get(i);   
-		        for (int j=0;j<roca2.size();j++) {
-		          Roca roca2 = roca2.get(j); 
+		    	Roca Roca1 = roca1.get(i);   
+		        for (int j=0;j<balls2.size();j++) {
+		          Ball2 ball2 = balls2.get(j); 
 		          if (i<j) {
-		        	  roca1.checkCollision(roca2);
-		     
+		        	  balls2.checkCollision(ball2);
 		          }
 		        }
-		      }*/ 
+		      }*/
 	      }
 	      //dibujar balas
 	     for (Bullet b : balas) {       
@@ -198,6 +205,18 @@ public class PantallaJuego implements Screen {
 	      for (int i = 0; i < roca1.size(); i++) {
 	    	    Roca b=roca1.get(i);
 	    	    b.draw(batch);
+		          //perdió vida o game over
+	              nave.checkCollision(b);
+		            //asteroide se destruye con el choque             
+	            	 //roca1.remove(i);
+	            	 //roca2.remove(i);
+	            	 //i--;
+	              //}   	  
+	        }
+	      
+	      for (int i = 0; i < roca1.size(); i++) {
+	    	    Roca b=roca1.get(i);
+	    	    b.draw(batch);
 	      }
 	      if (tesoro.estaActivo()) {
 	    	  tesoro.draw(batch);
@@ -212,6 +231,7 @@ public class PantallaJuego implements Screen {
   			game.setScreen(ss);
   			dispose();
   		  }
+		  dibujaEncabezado();
 	      batch.end();
 	      //nivel completado
 	      if (balls1.size()==0) {
@@ -221,7 +241,7 @@ public class PantallaJuego implements Screen {
 			game.setScreen(ss);
 			dispose();
 		  }
-	    	 
+	     
 	}
     
     public boolean agregarBala(Bullet bb) {

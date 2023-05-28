@@ -40,7 +40,7 @@ public class PantallaMenu implements Screen {
 		game.getBatch().begin();
         game.getBatch().draw(hola, 0, 0, 1200, 800);
         game.getFont().setColor(0,0,0,1);
-		game.getFont().draw(game.getBatch(), "Bienvenido a Pirates Survivors !", 500, 600);
+		game.getFont().draw(game.getBatch(), "¡Bienvenido a Pirates Survivors !", 500, 600);
         game.getFont().setColor(1,1,1,1);
 		game.getFont().draw(game.getBatch(), "Pincha en cualquier lado o presiona cualquier tecla para comenzar ...", 250, 250);
 	
