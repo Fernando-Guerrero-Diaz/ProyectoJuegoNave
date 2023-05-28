@@ -44,7 +44,7 @@ public class Nave4 {
     	spr = new Sprite(tx);
     	spr.setPosition(x, y);
     	//spr.setOriginCenter();
-    	spr.setBounds(x, y, 90, 90);
+    	spr.setBounds(x, y, 60, 92);
 
     }
     public void draw(SpriteBatch batch, PantallaJuego juego){
@@ -76,8 +76,29 @@ public class Nave4 {
         // disparo
         
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)&&cooldownDisparo==0) {         
-          Bullet  balaL = new Bullet(spr.getX()+spr.getWidth()/2,spr.getY()+ spr.getHeight(),(int)(-7*Math.cos(Math.toRadians(rotacion))),(int)(-7*Math.sin(Math.toRadians(rotacion))),txBala);
-          Bullet  balaR = new Bullet(spr.getX()+spr.getWidth()/2,spr.getY()+ spr.getHeight(),(int)(7*Math.cos(Math.toRadians(rotacion))),(int)(7*Math.sin(Math.toRadians(rotacion))),txBala);
+            	float xbullet,ybullet;
+            	if(rotacion>90 && rotacion<180) {
+            		xbullet=spr.getX()-spr.getWidth()*8/9;
+            		ybullet=spr.getY()-spr.getHeight()*1/9;
+            	}
+            	else if(rotacion>=180 && rotacion<270) {
+            		xbullet=spr.getX()-spr.getWidth()/3;
+            		ybullet=spr.getY()-spr.getHeight()/2;
+            	}
+            	else if(rotacion<=90 && rotacion >0) {
+            		xbullet=spr.getX()-spr.getHeight()/2;
+            		ybullet=spr.getY()+spr.getWidth();
+            	}
+            	else if(rotacion>=270 && rotacion<360) {
+            		xbullet=spr.getX()+spr.getHeight()*3/5;
+            		ybullet=spr.getY();
+            	}
+            	else {
+            		xbullet=spr.getX()+spr.getWidth()/2;
+            		ybullet=spr.getY()+ spr.getHeight()/2;
+            	}
+              Bullet  balaL = new Bullet(xbullet,ybullet,(int)(-7*Math.cos(Math.toRadians(rotacion))),(int)(-7*Math.sin(Math.toRadians(rotacion))),txBala);
+              Bullet  balaR = new Bullet(xbullet,ybullet,(int)(7*Math.cos(Math.toRadians(rotacion))),(int)(7*Math.sin(Math.toRadians(rotacion))),txBala);
           cooldownDisparo=100;
           juego.agregarBala(balaL);
           juego.agregarBala(balaR);
