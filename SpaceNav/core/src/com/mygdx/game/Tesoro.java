@@ -12,8 +12,6 @@ public class Tesoro implements Pickup {
     private int xSpeed;
     private int ySpeed;
     private Sprite spr;
-    private int exitmargen=50;
-    private int entermargen=10;
     private int puntos = 100;
     private boolean activo;
 
@@ -38,19 +36,7 @@ public class Tesoro implements Pickup {
     public void update() {
         x += getXSpeed();
         y += getySpeed();
-        
-        /*if ((x+getXSpeed()< -exitmargen))
-        	x=Gdx.graphics.getWidth()+entermargen;        	
-        else if(x+getXSpeed()+spr.getWidth() > Gdx.graphics.getWidth()+exitmargen+entermargen)
-        	x=-entermargen ;        
-        if (y+getySpeed() < -exitmargen +entermargen)
-        	y=Gdx.graphics.getHeight()+entermargen;
-        if(y+getySpeed()+spr.getHeight() > Gdx.graphics.getHeight()+exitmargen+entermargen)
-        	y=-entermargen;*/
-        if (x+getXSpeed() < 0 || x+getXSpeed()+spr.getWidth() > Gdx.graphics.getWidth())
-        	setXSpeed(getXSpeed() * -1);
-        if (y+getySpeed() < 0 || y+getySpeed()+spr.getHeight() > Gdx.graphics.getHeight())
-        	setySpeed(getySpeed() * -1);
+        checkReboteBordes();
         spr.setPosition(x, y);
     }
     
@@ -79,6 +65,13 @@ public class Tesoro implements Pickup {
 		return puntos;
 		
 	}
+	public void checkReboteBordes() {
+        if (x+getXSpeed() < 0 || x+getXSpeed()+spr.getWidth() > Gdx.graphics.getWidth())
+        	setXSpeed(getXSpeed() * -1);
+        if (y+getySpeed() < 0 || y+getySpeed()+spr.getHeight() > Gdx.graphics.getHeight())
+        	setySpeed(getySpeed() * -1);
+	}
+	
 	public boolean estaActivo() {
 		return activo;
 	}
