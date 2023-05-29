@@ -48,7 +48,7 @@ public class Nave4 {
     	spr.setBounds(x, y, 60, 92);
 
     }
-    public void draw(SpriteBatch batch, PantallaJuego juego){
+    public void draw(SpriteBatch batch, gerenteElementos gerente){
         float x =  spr.getX();
         float y =  spr.getY();
         if (!herido) {
@@ -101,8 +101,8 @@ public class Nave4 {
               Bullet  balaL = new Bullet(xbullet,ybullet,(int)(-7*Math.cos(Math.toRadians(rotacion))),(int)(-7*Math.sin(Math.toRadians(rotacion))),txBala);
               Bullet  balaR = new Bullet(xbullet,ybullet,(int)(7*Math.cos(Math.toRadians(rotacion))),(int)(7*Math.sin(Math.toRadians(rotacion))),txBala);
           cooldownDisparo=100;
-          juego.agregarBala(balaL);
-          juego.agregarBala(balaR);
+          gerente.agregarBala(balaL);
+          gerente.agregarBala(balaR);
 	      soundBala.play();
         }
         
