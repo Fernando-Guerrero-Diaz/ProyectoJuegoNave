@@ -14,8 +14,8 @@ public class Nave4 {
 	
 	private boolean destruida = false;
     private int vidas = 50;
-    private float xVel = 0;
-    private float yVel = 0;
+    private int xVel = 0;
+    private int yVel = 0;
     private Sprite spr;
     private Sound sonidoHerido;
     private Sound soundBala;
@@ -55,8 +55,8 @@ public class Nave4 {
 	        // que se mueva con teclado
         	movimientoJugador();
 
-	        xVel =(float) ( velocidad * -Math.sin(Math.toRadians(rotacion)));
-	        yVel =(float) ( velocidad * Math.cos(Math.toRadians(rotacion)));
+	        xVel =(int)( velocidad * -Math.sin(Math.toRadians(rotacion)));
+	        yVel =(int)( velocidad * Math.cos(Math.toRadians(rotacion)));
 	        spr.setRotation(rotacion);
 	        // que se mantenga dentro de los bordes de la ventana
 	        if (x+xVel < 0 || x+xVel+spr.getWidth() > Gdx.graphics.getWidth())
