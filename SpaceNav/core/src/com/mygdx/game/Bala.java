@@ -1,10 +1,9 @@
-package com.mygdx.game.Movimiento;
+package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.Ball2;
 
 public class Bala extends Movimiento {
 	private boolean destroyed = false;
@@ -30,12 +29,12 @@ public class Bala extends Movimiento {
     	spr.draw(batch);
     }
     
-    public boolean checkCollision(Ball2 b2) {
-        if(spr.getBoundingRectangle().overlaps(b2.getArea())){
+    public boolean checkCollision(Enemigo b2) {
+        if(b2.estaActivo() && spr.getBoundingRectangle().overlaps(b2.getArea())){
         	// Se destruyen ambos
             this.destroyed = true;
             return true;
-
+            
         }
         return false;
     }

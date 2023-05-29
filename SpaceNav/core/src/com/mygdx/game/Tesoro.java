@@ -6,40 +6,42 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 
-public class Tesoro implements Pickup {
-	private int x;
-    private int y;
-    private int xSpeed;
-    private int ySpeed;
-    private Sprite spr;
+public class Tesoro extends Movimiento implements Pickup {
     private int puntos = 100;
     private boolean activo;
 
+ 
     public Tesoro(int x, int y, int size, int xSpeed, int ySpeed, Texture tx) {
     	spr = new Sprite(tx);
     	this.x = x; 
- 	
-        //validar que borde de esfera no quede fuera
+	
+    	//validar que borde de esfera no quede fuera
     	if (x-size < 0) this.x = x+size;
     	if (x+size > Gdx.graphics.getWidth())this.x = x-size;
          
-        this.y = y;
-        //validar que borde de esfera no quede fuera
-    	if (y-size < 0) this.y = y+size;
-    	if (y+size > Gdx.graphics.getHeight())this.y = y-size;
+    	this.y = y;
+    	//validar que borde de esfera no quede fuera
+		if (y-size < 0) this.y = y+size;
+		if (y+size > Gdx.graphics.getHeight())this.y = y-size;
     	
-        spr.setPosition(x, y);
-        this.setXSpeed(xSpeed);
-        this.setySpeed(ySpeed);
-        activo = true;
+    	spr.setPosition(x, y);
+    	this.setXSpeed(xSpeed);
+    	this.setySpeed(ySpeed);
+    	activo = true;
     }
-    public void update() {
+	
+	public void moverse() {
         x += getXSpeed();
         y += getySpeed();
-        checkReboteBordes();
+        
+        if (x+getXSpeed() < 0 || x+getXSpeed()+spr.getWidth() > Gdx.graphics.getWidth())
+        	setXSpeed(getXSpeed() * -1);
+        if (y+getySpeed() < 0 || y+getySpeed()+spr.getHeight() > Gdx.graphics.getHeight())
+        	setySpeed(getySpeed() * -1);
         spr.setPosition(x, y);
-    }
-    
+	}
+
+	   
     public Rectangle getArea() {
     	return spr.getBoundingRectangle();
     }
@@ -47,17 +49,17 @@ public class Tesoro implements Pickup {
     	spr.draw(batch);
     }
     
-	public int getXSpeed() {
-		return xSpeed;
+	public float getXSpeed() {
+		return xVel;
 	}
-	public void setXSpeed(int xSpeed) {
-		this.xSpeed = xSpeed;
+	public void setXSpeed(float xVel) {
+		this.xVel = xVel;
 	}
-	public int getySpeed() {
-		return ySpeed;
+	public float getySpeed() {
+		return yVel;
 	}
-	public void setySpeed(int ySpeed) {
-		this.ySpeed = ySpeed;
+	public void setySpeed(float yVel) {
+		this.yVel = yVel;
 	}
 	
 	public int getPuntos() {
@@ -65,16 +67,8 @@ public class Tesoro implements Pickup {
 		return puntos;
 		
 	}
-	public void checkReboteBordes() {
-        if (x+getXSpeed() < 0 || x+getXSpeed()+spr.getWidth() > Gdx.graphics.getWidth())
-        	setXSpeed(getXSpeed() * -1);
-        if (y+getySpeed() < 0 || y+getySpeed()+spr.getHeight() > Gdx.graphics.getHeight())
-        	setySpeed(getySpeed() * -1);
-	}
-	
 	public boolean estaActivo() {
 		return activo;
 	}
-
 
 }

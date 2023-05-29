@@ -1,4 +1,4 @@
-package com.mygdx.game.Movimiento;
+package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -7,11 +7,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
-import com.mygdx.game.Bullet;
-import com.mygdx.game.Elemento;
-import com.mygdx.game.Obstaculo;
-import com.mygdx.game.Pickup;
-import com.mygdx.game.gerenteElementos;
 
 public class Nave extends Movimiento{
 	private boolean destruida = false;
@@ -161,8 +156,8 @@ public class Nave extends Movimiento{
             		xbullet=spr.getX()+spr.getWidth()/2;
             		ybullet=spr.getY()+ spr.getHeight()/2;
             	}
-              Bullet  balaL = new Bullet(xbullet,ybullet,(int)(-7*Math.cos(Math.toRadians(rotacion))),(int)(-7*Math.sin(Math.toRadians(rotacion))),txBala);
-              Bullet  balaR = new Bullet(xbullet,ybullet,(int)(7*Math.cos(Math.toRadians(rotacion))),(int)(7*Math.sin(Math.toRadians(rotacion))),txBala);
+              Bala  balaL = new Bala(xbullet,ybullet,(int)(-7*Math.cos(Math.toRadians(rotacion))),(int)(-7*Math.sin(Math.toRadians(rotacion))),txBala);
+              Bala  balaR = new Bala(xbullet,ybullet,(int)(7*Math.cos(Math.toRadians(rotacion))),(int)(7*Math.sin(Math.toRadians(rotacion))),txBala);
           cooldownDisparo=100;
           gerente.agregarBala(balaL);
           gerente.agregarBala(balaR);
@@ -238,10 +233,12 @@ public class Nave extends Movimiento{
 
 
 public boolean checkCollision(Elemento b) {
+	if(cooldownDano<=0) {
 	if (b instanceof Obstaculo) {
 
         if(!herido && b.getArea().overlaps(spr.getBoundingRectangle())){
         	Obstaculo o = (Obstaculo) b;
+        	if (!o.estaActivo())return false;
         	// rebote
         	/*
             if (xVel ==0) xVel += b.getXSpeed()/2;
@@ -262,6 +259,7 @@ public boolean checkCollision(Elemento b) {
         	//actualizar vidas y herir
             vidas=vidas- o.getDaño();
             herido = true;
+            cooldownDano=100;
   		    tiempoHerido=tiempoHeridoMax;
   		    sonidoHerido.play();
             if (vidas<=0) 
@@ -270,6 +268,7 @@ public boolean checkCollision(Elemento b) {
     	}
 
     }
+	}
     if (b instanceof Pickup) {
     	if(b.getArea().overlaps(spr.getBoundingRectangle())) return true;
     }

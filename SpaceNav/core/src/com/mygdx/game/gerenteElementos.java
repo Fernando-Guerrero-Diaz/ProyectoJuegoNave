@@ -20,9 +20,9 @@ public class gerenteElementos {
 	private int cantAsteroides;
 	private int cantObstaculos;
 	private int velYroca;
-	private  ArrayList<Ball2> balls1 = new ArrayList<>();
-	private  ArrayList<Ball2> balls2 = new ArrayList<>();
-	private  ArrayList<Bullet> balas = new ArrayList<>();
+	private  ArrayList<Enemigo> balls1 = new ArrayList<>();
+	private  ArrayList<Enemigo> balls2 = new ArrayList<>();
+	private  ArrayList<Bala> balas = new ArrayList<>();
 	private ArrayList<Roca> roca1 = new ArrayList<>();
 	private ArrayList<Roca> roca2 = new ArrayList<>();
 	private Tesoro tesoro;
@@ -39,7 +39,7 @@ public class gerenteElementos {
         //crear asteroides
         Random r = new Random();
 	    for (int i = 0; i < cantAsteroides; i++) {
-	        Ball2 bb = new Ball2(r.nextInt((int)Gdx.graphics.getWidth()),
+	        Enemigo bb = new Enemigo(r.nextInt((int)Gdx.graphics.getWidth()),
 	  	            50+r.nextInt((int)Gdx.graphics.getHeight()-50),
 	  	            20+r.nextInt(10), velXAsteroides+r.nextInt(4), velYAsteroides+r.nextInt(4), 
 	  	            new Texture(Gdx.files.internal("aGreyMedium4.png")),300 + i*wait);	   
@@ -64,12 +64,12 @@ public class gerenteElementos {
 	
 	}
 	
-	public void update(Nave4 nave, SpriteBatch batch) {
+	public void update(Nave nave, SpriteBatch batch) {
 	      if (!nave.estaHerido()) {
 		      // colisiones entre balas y asteroides y su destruccion  
 	    	  for (int i = 0; i < balas.size(); i++) {
-		            Bullet b = balas.get(i);
-		            b.update();
+		            Bala b = balas.get(i);
+		            b.moverse();
 		            for (int j = 0; j < balls1.size(); j++) {    
 		              if (b.checkCollision(balls1.get(j))) {
 		            	  //puedes ajustar el sonido colocando entre play un float de entre 0 a 1, serian los %
@@ -88,20 +88,20 @@ public class gerenteElementos {
 		            }
 		      }
 		      //actualizar movimiento de asteroides dentro del area
-		      for (Ball2 ball : balls1) {
-		          ball.update();
+		      for (Enemigo ball : balls1) {
+		          ball.moverse();
 		      }
 		      for(Roca roca : roca1) {
-		    	  roca.update();
+		    	  roca.moverse();
 		    	  
 		      }
-		      if (tesoro.estaActivo()) tesoro.update();
+		      if (tesoro.estaActivo()) tesoro.moverse();
 		      
 		      //colisiones entre asteroides y sus rebotes  
 		      for (int i=0;i<balls1.size();i++) {
-		    	Ball2 ball1 = balls1.get(i);   
+		    	Enemigo ball1 = balls1.get(i);   
 		        for (int j=0;j<balls2.size();j++) {
-		          Ball2 ball2 = balls2.get(j); 
+		          Enemigo ball2 = balls2.get(j); 
 		          if (i!=j) {
 		        	  ball1.checkCollision(ball2);
 		     
@@ -120,13 +120,13 @@ public class gerenteElementos {
 		      }*/
 	      }
 	      //dibujar balas
-	     for (Bullet b : balas) {       
+	     for (Bala b : balas) {       
 	          b.draw(batch);
 	      }
 	      nave.draw(batch, this);
 	      //dibujar asteroides y manejar colision con nave
 	      for (int i = 0; i < balls1.size(); i++) {
-	    	    Ball2 b=balls1.get(i);
+	    	    Enemigo b=balls1.get(i);
 	    	    b.draw(batch);
 		          //perdió vida o game over
 	              if (nave.checkCollision(b)) {
@@ -157,7 +157,7 @@ public class gerenteElementos {
 	    	  if(nave.checkCollision(tesoro)) score+=tesoro.getPuntos();
 	      }
 	}
-    public boolean agregarBala(Bullet bb) {
+    public boolean agregarBala(Bala bb) {
     	return balas.add(bb);
     }
     public boolean nivelCompleto() {
