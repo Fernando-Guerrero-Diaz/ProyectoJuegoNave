@@ -76,6 +76,6 @@ public class Roca extends Movimiento implements Obstaculo{
 		return false;
 	}
 	public boolean estaActivo() {
-		return activo;
+		return true;
 	}
 }

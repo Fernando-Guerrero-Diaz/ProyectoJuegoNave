@@ -42,7 +42,7 @@ public class gerenteElementos {
 	        Enemigo bb = new Enemigo(r.nextInt((int)Gdx.graphics.getWidth()),
 	  	            50+r.nextInt((int)Gdx.graphics.getHeight()-50),
 	  	            20+r.nextInt(10), velXAsteroides+r.nextInt(4), velYAsteroides+r.nextInt(4), 
-	  	            new Texture(Gdx.files.internal("aGreyMedium4.png")),300 + i*wait);	   
+	  	            new Texture(Gdx.files.internal("enemy.png")),300 + i*wait);	   
 	  	    balls1.add(bb);
 	  	    balls2.add(bb);
 	  	}
