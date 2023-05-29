@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 
+import java.util.Random;
+
 
 public class Ball2  implements Obstaculo {
 	private float x;
@@ -16,11 +18,18 @@ public class Ball2  implements Obstaculo {
     private int exitmargen=50;
     private int entermargen=10;
     private int daño = 5;
+    private int spawnWait;
+    private boolean activo;
 
-    public Ball2(int x, int y, int size, float xVel, float yVel, Texture tx) {
+    public Ball2(int x, int y, int size, float xVel, float yVel, Texture tx, int wait) {
     	spr = new Sprite(tx);
-    	this.x = x; 
- 	
+    	Random r = new Random();
+    	x=r.nextInt((int)Gdx.graphics.getWidth());
+    	y=Gdx.graphics.getHeight()+entermargen;
+    	/*
+    	 * this.x = x; 
+    	 
+    	
         //validar que borde de esfera no quede fuera
     	if (x-size < 0) this.x = x+size;
     	if (x+size > Gdx.graphics.getWidth())this.x = x-size;
@@ -29,12 +38,15 @@ public class Ball2  implements Obstaculo {
         //validar que borde de esfera no quede fuera
     	if (y-size < 0) this.y = y+size;
     	if (y+size > Gdx.graphics.getHeight())this.y = y-size;
-    	
+    	*/
         spr.setPosition(x, y);
         this.setXSpeed(xVel);
         this.setySpeed(yVel);
+        spawnWait = wait;
+        activo=false;
     }
     public void update() {
+    	if (activo) {
         x += getXSpeed();
         y += getySpeed();
         
@@ -51,17 +63,25 @@ public class Ball2  implements Obstaculo {
         if (y+getySpeed() < 0 || y+getySpeed()+spr.getHeight() > Gdx.graphics.getHeight())
         	setySpeed(getySpeed() * -1);*/
         spr.setPosition(x, y);
+    	}
+    	else {
+    		spawnWait--;
+    		if (spawnWait<=0)activo=true;
+    	}
     }
     
     public Rectangle getArea() {
     	return spr.getBoundingRectangle();
     }
     public void draw(SpriteBatch batch) {
-    	spr.draw(batch);
+    	if (activo){
+    	spr.draw(batch);}
+    	
     }
     
     public void checkCollision(Ball2 b2) {
-        if(spr.getBoundingRectangle().overlaps(b2.spr.getBoundingRectangle())){
+    	
+        if(b2.estaActivo() && spr.getBoundingRectangle().overlaps(b2.spr.getBoundingRectangle())){
         	// rebote de asteroides si lo quitas se transpasas
             if (getXSpeed() ==0) setXSpeed(getXSpeed() + b2.getXSpeed()/2);
             //if (b2.getXSpeed() ==0) b2.setXSpeed(b2.getXSpeed() + getXSpeed()/2);
@@ -95,4 +115,7 @@ public class Ball2  implements Obstaculo {
 		return true;
 	}
     
+	public boolean estaActivo() {
+		return activo;
+	}
 }

@@ -35,14 +35,14 @@ public class gerenteElementos {
 		this.cantAsteroides = cantAsteroides;
 		this.cantObstaculos = cantObstaculos;
 		this.velYroca = velYroca;
-		
+		int wait =200;
         //crear asteroides
         Random r = new Random();
 	    for (int i = 0; i < cantAsteroides; i++) {
 	        Ball2 bb = new Ball2(r.nextInt((int)Gdx.graphics.getWidth()),
 	  	            50+r.nextInt((int)Gdx.graphics.getHeight()-50),
 	  	            20+r.nextInt(10), velXAsteroides+r.nextInt(4), velYAsteroides+r.nextInt(4), 
-	  	            new Texture(Gdx.files.internal("aGreyMedium4.png")));	   
+	  	            new Texture(Gdx.files.internal("aGreyMedium4.png")),300 + i*wait);	   
 	  	    balls1.add(bb);
 	  	    balls2.add(bb);
 	  	}

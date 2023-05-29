@@ -103,4 +103,10 @@ public class Enemigo extends Movimiento implements Obstaculo{
    		return true;
    	}
 
+	@Override
+	public boolean estaActivo() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

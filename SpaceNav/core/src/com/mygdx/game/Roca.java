@@ -93,4 +93,7 @@ public class Roca implements Obstaculo{
 	public boolean esDestructible() {
 		return false;
 	}
+	public boolean estaActivo() {
+		return true;
+	}
 }

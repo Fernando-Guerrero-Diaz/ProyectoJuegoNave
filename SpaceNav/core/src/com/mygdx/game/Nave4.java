@@ -180,6 +180,7 @@ public class Nave4 {
 
 	        if(!herido && b.getArea().overlaps(spr.getBoundingRectangle())){
 	        	Obstaculo o = (Obstaculo) b;
+	        	if (!o.estaActivo())return false;
 	        	// rebote
 	        	/*
 	            if (xVel ==0) xVel += b.getXSpeed()/2;

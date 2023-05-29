@@ -35,7 +35,7 @@ public class Bullet {
 	    }
 	    
 	    public boolean checkCollision(Ball2 b2) {
-	        if(spr.getBoundingRectangle().overlaps(b2.getArea())){
+	        if(b2.estaActivo() && spr.getBoundingRectangle().overlaps(b2.getArea())){
 	        	// Se destruyen ambos
 	            this.destroyed = true;
 	            return true;
