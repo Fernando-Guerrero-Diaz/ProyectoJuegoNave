@@ -8,16 +8,16 @@ import com.badlogic.gdx.math.Rectangle;
 
 
 public class Ball2  implements Obstaculo {
-	private int x;
-    private int y;
-    private int xSpeed;
-    private int ySpeed;
+	private float x;
+    private float y;
+    private float xVel;
+    private float yVel;
     private Sprite spr;
     private int exitmargen=50;
     private int entermargen=10;
     private int daño = 5;
 
-    public Ball2(int x, int y, int size, int xSpeed, int ySpeed, Texture tx) {
+    public Ball2(int x, int y, int size, float xVel, float yVel, Texture tx) {
     	spr = new Sprite(tx);
     	this.x = x; 
  	
@@ -31,8 +31,8 @@ public class Ball2  implements Obstaculo {
     	if (y+size > Gdx.graphics.getHeight())this.y = y-size;
     	
         spr.setPosition(x, y);
-        this.setXSpeed(xSpeed);
-        this.setySpeed(ySpeed);
+        this.setXSpeed(xVel);
+        this.setySpeed(yVel);
     }
     public void update() {
         x += getXSpeed();
@@ -74,17 +74,17 @@ public class Ball2  implements Obstaculo {
             b2.setySpeed(- b2.getySpeed()); 
         }
     }
-	public int getXSpeed() {
-		return xSpeed;
+	public float getXSpeed() {
+		return xVel;
 	}
-	public void setXSpeed(int xSpeed) {
-		this.xSpeed = xSpeed;
+	public void setXSpeed(float xVel) {
+		this.xVel = xVel;
 	}
-	public int getySpeed() {
-		return ySpeed;
+	public float getySpeed() {
+		return yVel;
 	}
-	public void setySpeed(int ySpeed) {
-		this.ySpeed = ySpeed;
+	public void setySpeed(float yVel) {
+		this.yVel = yVel;
 	}
 	
 	public int getDaño() {
