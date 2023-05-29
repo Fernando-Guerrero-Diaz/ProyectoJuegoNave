@@ -102,7 +102,7 @@ public class gerenteElementos {
 		    	Ball2 ball1 = balls1.get(i);   
 		        for (int j=0;j<balls2.size();j++) {
 		          Ball2 ball2 = balls2.get(j); 
-		          if (i<j) {
+		          if (i!=j) {
 		        	  ball1.checkCollision(ball2);
 		     
 		          }

@@ -64,14 +64,14 @@ public class Ball2  implements Obstaculo {
         if(spr.getBoundingRectangle().overlaps(b2.spr.getBoundingRectangle())){
         	// rebote de asteroides si lo quitas se transpasas
             if (getXSpeed() ==0) setXSpeed(getXSpeed() + b2.getXSpeed()/2);
-            if (b2.getXSpeed() ==0) b2.setXSpeed(b2.getXSpeed() + getXSpeed()/2);
+            //if (b2.getXSpeed() ==0) b2.setXSpeed(b2.getXSpeed() + getXSpeed()/2);
         	setXSpeed(- getXSpeed());
-            b2.setXSpeed(-b2.getXSpeed());
+            //b2.setXSpeed(-b2.getXSpeed());
             
             if (getySpeed() ==0) setySpeed(getySpeed() + b2.getySpeed()/2);
-            if (b2.getySpeed() ==0) b2.setySpeed(b2.getySpeed() + getySpeed()/2);
+            //if (b2.getySpeed() ==0) b2.setySpeed(b2.getySpeed() + getySpeed()/2);
             setySpeed(- getySpeed());
-            b2.setySpeed(- b2.getySpeed()); 
+            //b2.setySpeed(- b2.getySpeed()); 
         }
     }
 	public float getXSpeed() {
