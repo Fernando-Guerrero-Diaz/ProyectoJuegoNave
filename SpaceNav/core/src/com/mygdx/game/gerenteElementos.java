@@ -5,21 +5,12 @@ import java.util.Random;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class gerenteElementos {
 
-	private int velXAsteroides; 
-	private int velYAsteroides; 
-	private int cantAsteroides;
-	private int cantObstaculos;
-	private int velYroca;
+
 	private  ArrayList<Enemigo> balls1 = new ArrayList<>();
 	private  ArrayList<Enemigo> balls2 = new ArrayList<>();
 	private  ArrayList<Bala> balas = new ArrayList<>();
@@ -30,19 +21,13 @@ public class gerenteElementos {
 	
 	public gerenteElementos(int score, int velXAsteroides, int velYAsteroides, int cantAsteroides, int cantObstaculos,int velYroca) {
 		this.score=score;
-		this.velXAsteroides = velXAsteroides;
-		this.velYAsteroides = velYAsteroides;
-		this.cantAsteroides = cantAsteroides;
-		this.cantObstaculos = cantObstaculos;
-		this.velYroca = velYroca;
+
 		int wait =200;
         //crear asteroides
         Random r = new Random();
 	    for (int i = 0; i < cantAsteroides; i++) {
-	        Enemigo bb = new Enemigo(r.nextInt((int)Gdx.graphics.getWidth()),
-	  	            50+r.nextInt((int)Gdx.graphics.getHeight()-50),
-	  	            20+r.nextInt(10), velXAsteroides+r.nextInt(4), velYAsteroides+r.nextInt(4), 
-	  	            new Texture(Gdx.files.internal("enemy.png")),300 + i*wait);	   
+	        Enemigo bb = new Enemigo(velXAsteroides+r.nextInt(4), velYAsteroides+r.nextInt(4), 
+	        		new Texture(Gdx.files.internal("enemy.png")),300 + i*wait);	   
 	  	    balls1.add(bb);
 	  	    balls2.add(bb);
 	  	}
@@ -72,8 +57,6 @@ public class gerenteElementos {
 		            b.moverse();
 		            for (int j = 0; j < balls1.size(); j++) {    
 		              if (b.checkCollision(balls1.get(j))) {
-		            	  //puedes ajustar el sonido colocando entre play un float de entre 0 a 1, serian los %
-		            	 //explosionSound.play(0.15f);
 		            	 balls1.remove(j);
 		            	 balls2.remove(j);
 		            	 j--;
@@ -107,17 +90,7 @@ public class gerenteElementos {
 		     
 		          }
 		        }
-		      } 
-		      
-		      /*for (int i=0;i<roca1.size();i++) {
-		    	Roca Roca1 = roca1.get(i);   
-		        for (int j=0;j<balls2.size();j++) {
-		          Ball2 ball2 = balls2.get(j); 
-		          if (i<j) {
-		        	  balls2.checkCollision(ball2);
-		          }
-		        }
-		      }*/
+		      } 	      
 	      }
 	      //dibujar balas
 	     for (Bala b : balas) {       

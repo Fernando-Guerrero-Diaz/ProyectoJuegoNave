@@ -13,21 +13,11 @@ public class Enemigo extends Movimiento implements Obstaculo{
 	private int spawnWait;
     private boolean activo;
 	
-    public Enemigo(int x, int y, int size, float xVel, float yVel, Texture tx, int wait) {
+    public Enemigo(float xVel, float yVel, Texture tx, int wait) {
     	spr = new Sprite(tx);
     	Random r = new Random();
     	x=r.nextInt((int)Gdx.graphics.getWidth());
     	y=Gdx.graphics.getHeight()+entermargen;
- 	
-        //validar que borde de esfera no quede fuera
-    	if (x-size < 0) this.x = x+size;
-    	if (x+size > Gdx.graphics.getWidth())this.x = x-size;
-	         
-        this.y = y;
-        //validar que borde de esfera no quede fuera
-    	if (y-size < 0) this.y = y+size;
-    	if (y+size > Gdx.graphics.getHeight())this.y = y-size;
-	    	
         spr.setPosition(x, y);
         this.setXSpeed(xVel);
         this.setySpeed(yVel);
@@ -56,20 +46,7 @@ public class Enemigo extends Movimiento implements Obstaculo{
     	}
     }
 		
-/*	public void update() {
-        x += getXSpeed();
-        y += getySpeed();
-        
-        if ((x+getXSpeed()< -exitmargen))
-        	x=Gdx.graphics.getWidth()+entermargen;        	
-        else if(x+getXSpeed()+spr.getWidth() > Gdx.graphics.getWidth()+exitmargen+entermargen)
-        	x=-entermargen ;        
-        if (y+getySpeed() < -exitmargen +entermargen)
-        	y=Gdx.graphics.getHeight()+entermargen;
-        if(y+getySpeed()+spr.getHeight() > Gdx.graphics.getHeight()+exitmargen+entermargen)
-        	y=-entermargen;
-        spr.setPosition(x, y);
-    }*/
+
     public Rectangle getArea() {
     	return spr.getBoundingRectangle();
     }
@@ -79,16 +56,11 @@ public class Enemigo extends Movimiento implements Obstaculo{
     
     public void checkCollision(Enemigo b2) {
         if(b2.estaActivo() && spr.getBoundingRectangle().overlaps(b2.spr.getBoundingRectangle())){
-        	// rebote de asteroides si lo quitas se transpasas
+        	// rebote de enemigos entre si
             if (getXSpeed() ==0) setXSpeed(getXSpeed() + b2.getXSpeed()/2);
-            //if (b2.getXSpeed() ==0) b2.setXSpeed(b2.getXSpeed() + getXSpeed()/2);
           	setXSpeed(- getXSpeed());
-            //b2.setXSpeed(-b2.getXSpeed());
-                
             if (getySpeed() ==0) setySpeed(getySpeed() + b2.getySpeed()/2);
-            //if (b2.getySpeed() ==0) b2.setySpeed(b2.getySpeed() + getySpeed()/2);
             setySpeed(- getySpeed());
-            //b2.setySpeed(- b2.getySpeed()); 
         }
     }
     	

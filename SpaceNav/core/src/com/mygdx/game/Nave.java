@@ -171,66 +171,6 @@ public class Nave extends Movimiento{
        
     }
 
-/*private void movimientoJugador() {
-    if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.DOWN)) direccion = 135.0f;
-    else if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.UP)) direccion = 45.0f;
-    else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.UP)) direccion = 315.0f;
-    else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.DOWN)) direccion = 225.0f;
-    else if (Gdx.input.isKeyPressed(Input.Keys.UP)) direccion = 0.0f;
-    else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) direccion = 90.0f;
-    else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) direccion = 180.0f;
-    else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) direccion = 270.0f;
-    if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) 
-    		|| Gdx.input.isKeyPressed(Input.Keys.LEFT) 
-    		|| Gdx.input.isKeyPressed(Input.Keys.UP) 
-    		|| Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-    	tiempoAutoDireccion=40;
-        if ((velocidad > 2) &&
-        		((rotacion > direccion+135 && rotacion < direccion +225) ||
-        		 (rotacion > direccion-135 && rotacion < direccion -225))) {
-        	velocidad = velocidad -frenoA;
-        	if (rotVel<rotVMax/2)rotVel-=rotAcc;
-        }
-        else  if( rotVel<rotVMax) rotVel+=rotAcc;
-        if ((rotacion>direccion-1.5f)&&(rotacion<direccion+1.5f)) {
-        	rotacion = direccion;
-        	rotVel=0;
-        	
-        }
-        else if (rotacion < direccion) {
-        	if (rotacion < direccion -180) rotacion=rotacion-rotVel;
-        	else rotacion=rotacion+rotVel;
-        	}
-        else {
-        	if(rotacion < direccion + 180) rotacion=rotacion-rotVel;
-        	else rotacion=rotacion+rotVel;
-        	}
-		
-        if ((direccion==rotacion)||
-        	(rotacion < direccion +45 && rotacion > direccion -45) ||
-        	(rotacion < direccion -315 && rotacion > direccion -405) ||
-        	(rotacion < direccion +405 && rotacion > direccion +315)) {
-        		velocidad = velocidad + aceleracion;
-        		
-        	}
-        
-
-    }
-    else {
-    	if (velocidad>0)
-    	velocidad = velocidad - frenoP;
-    	else velocidad = 0.0f;
-    	if (velocidad < 0.2f && tiempoAutoDireccion >0) {
-    		tiempoAutoDireccion--;
-    	}
-    	if (tiempoAutoDireccion <=0) direccion = 0.0f;
-    }
-
-    if (rotacion>360.0f) rotacion = rotacion -360.0f;
-    if (rotacion<0.0f) rotacion = 360.0f - rotacion;
-    if (velocidad>maxVelocidad) velocidad = maxVelocidad;
-}*/
-
 
 public boolean checkCollision(Elemento b) {
 	if(cooldownDano<=0) {
@@ -239,23 +179,6 @@ public boolean checkCollision(Elemento b) {
         if(!herido && b.getArea().overlaps(spr.getBoundingRectangle())){
         	Obstaculo o = (Obstaculo) b;
         	if (!o.estaActivo())return false;
-        	// rebote
-        	/*
-            if (xVel ==0) xVel += b.getXSpeed()/2;
-            if (b.getXSpeed() ==0) b.setXSpeed(b.getXSpeed() + (int)xVel/2);
-            xVel = - xVel;
-            b.setXSpeed(-b.getXSpeed());
-            
-            if (yVel ==0) yVel += b.getySpeed()/2;
-            if (b.getySpeed() ==0) b.setySpeed(b.getySpeed() + (int)yVel/2);
-            yVel = - yVel;
-            b.setySpeed(- b.getySpeed());
-            */
-            // despegar sprites
-      /*      int cont = 0;
-            while (b.getArea().overlaps(spr.getBoundingRectangle()) && cont<xVel) {
-               spr.setX(spr.getX()+Math.signum(xVel));
-            }   */
         	//actualizar vidas y herir
             vidas=vidas- o.getDaño();
             herido = true;
@@ -283,7 +206,6 @@ public boolean estaHerido() {
 }
 
 public int getVidas() {return vidas;}
-//public boolean isDestruida() {return destruida;}
 public int getX() {return (int) spr.getX();}
 public int getY() {return (int) spr.getY();}
 public void setVidas(int vidas2) {vidas = vidas2;}
