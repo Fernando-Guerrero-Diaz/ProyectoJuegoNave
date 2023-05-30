@@ -34,7 +34,7 @@ public class PantallaJuego implements Screen {
 	private Texture barra;
 	private Texture dinabarra;
 	
-	private gerenteElementos gerente;
+	private GerenteElementos gerente;
 	
 	private Nave nave;
 
@@ -44,7 +44,7 @@ public class PantallaJuego implements Screen {
 		this.game = game;
 		this.ronda = ronda;
 		this.score = score;
-		gerente = new gerenteElementos(score,velXAsteroides, velYAsteroides, cantAsteroides, cantObstaculos,velYroca);
+		gerente = new GerenteElementos(score,velXAsteroides, velYAsteroides, cantAsteroides, cantObstaculos,velYroca);
 		this.velXAsteroides = velXAsteroides;
 		this.velYAsteroides = velYAsteroides;
 		this.cantAsteroides = cantAsteroides;

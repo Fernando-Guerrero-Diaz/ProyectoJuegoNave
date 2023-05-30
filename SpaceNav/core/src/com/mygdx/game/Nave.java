@@ -106,7 +106,7 @@ public class Nave extends Movimiento{
 }
 
 
-	public void draw(SpriteBatch batch, gerenteElementos gerente){
+	public void draw(SpriteBatch batch, GerenteElementos gerente){
         float x =  spr.getX();
         float y =  spr.getY();
         if (!herido) {

@@ -8,7 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class gerenteElementos {
+public class GerenteElementos {
 
 
 	private  ArrayList<Enemigo> balls1 = new ArrayList<>();
@@ -19,7 +19,7 @@ public class gerenteElementos {
 	private Tesoro tesoro;
 	int score;
 	
-	public gerenteElementos(int score, int velXAsteroides, int velYAsteroides, int cantAsteroides, int cantObstaculos,int velYroca) {
+	public GerenteElementos(int score, int velXAsteroides, int velYAsteroides, int cantAsteroides, int cantObstaculos,int velYroca) {
 		this.score=score;
 
 		int wait =200;
