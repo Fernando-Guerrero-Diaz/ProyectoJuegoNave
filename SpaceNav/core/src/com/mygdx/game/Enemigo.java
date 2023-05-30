@@ -7,7 +7,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 public class Enemigo extends Movimiento implements Obstaculo{
-	private int exitmargen=50;
+	private int exitmargen=100;
 	private int entermargen=10;
 	private int daño=5;
 	private int spawnWait;
