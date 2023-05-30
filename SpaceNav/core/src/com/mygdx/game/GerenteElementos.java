@@ -17,7 +17,7 @@ public class GerenteElementos {
 	private ArrayList<Roca> roca1 = new ArrayList<>();
 	private ArrayList<Roca> roca2 = new ArrayList<>();
 	private Tesoro tesoro;
-	int score;
+	private int score;
 	
 	public GerenteElementos(int score, int velXAsteroides, int velYAsteroides, int cantAsteroides, int cantObstaculos,int velYroca) {
 		this.score=score;
@@ -136,4 +136,7 @@ public class GerenteElementos {
     public boolean nivelCompleto() {
     	return(balls1.size()==0);
     }
+	public int getScore() {
+		return score;
+	}
 }

@@ -80,7 +80,7 @@ public class PantallaJuego implements Screen {
 		//CharSequence str = "Vidas: "+nave.getVidas()+" Ronda: "+ronda;
 		game.getFont().getData().setScale(2f);		
 		//game.getFont().draw(batch, str, 10, 30);
-		game.getFont().draw(batch, "Score:"+this.score, Gdx.graphics.getWidth()-150, 30);
+		game.getFont().draw(batch, "Score:"+gerente.getScore(), Gdx.graphics.getWidth()-150, 30);
 		game.getFont().draw(batch, "HighScore:"+game.getHighScore(), Gdx.graphics.getWidth()/2-100, 30);
 		//game.getBatch().draw(dinabarra,18,7,405,56);
 		game.getBatch().draw(barra, 0, 0, 458, 78);
@@ -126,6 +126,7 @@ public class PantallaJuego implements Screen {
 	    	  ocean2 = new Texture(Gdx.files.internal("newOcean1.jpg"));
 	      }
 	      batch.end();
+	      score=gerente.getScore();
 	      //nivel completado
 	      if (gerente.nivelCompleto()) {
 			Screen ss = new PantallaJuego(game,ronda+1, nave.getVidas(), score, 
