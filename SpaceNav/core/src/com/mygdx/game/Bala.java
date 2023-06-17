@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Bala extends Movimiento {
+	private int daño = 5;
 	private boolean destroyed = false;
 	private Sound explosionSound = Gdx.audio.newSound(Gdx.files.internal("explosion.ogg"));
 
@@ -37,6 +38,7 @@ public class Bala extends Movimiento {
         	// Se destruyen ambos
             this.destroyed = true;
             explosionSound.play(0.15f);
+            b2.recibeDaño(daño);
             return true;
             
         }

@@ -8,4 +8,5 @@ import com.badlogic.gdx.math.Rectangle;
 
 public interface Elemento {
 	public Rectangle getArea();
+	public boolean eliminado();
 }

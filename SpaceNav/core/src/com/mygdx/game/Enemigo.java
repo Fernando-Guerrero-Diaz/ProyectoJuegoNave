@@ -12,6 +12,7 @@ public class Enemigo extends Movimiento implements Obstaculo{
 	private int daño=5;
 	private int spawnWait;
     private boolean activo;
+    private int vida=5;
 	
     public Enemigo(float xVel, float yVel, Texture tx, int wait) {
     	spr = new Sprite(tx);
@@ -89,6 +90,20 @@ public class Enemigo extends Movimiento implements Obstaculo{
 	public boolean estaActivo() {
 		// TODO Auto-generated method stub
 		return activo;
+	}
+
+	@Override
+	public boolean eliminado() {
+		
+		if(vida<=0)return true;
+		
+		return false;
+	}
+
+	@Override
+	public void recibeDaño(int daño) {
+		vida = vida - daño;
+		
 	}
 
 }

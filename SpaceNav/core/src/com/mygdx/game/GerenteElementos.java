@@ -57,9 +57,9 @@ public class GerenteElementos {
 		            b.moverse();
 		            for (int j = 0; j < balls1.size(); j++) {    
 		              if (b.checkCollision(balls1.get(j))) {
-		            	 balls1.remove(j);
-		            	 balls2.remove(j);
-		            	 j--;
+		            	 //balls1.remove(j);
+		            	 //balls2.remove(j);
+		            	 //j--;
 		            	 score +=10;
 		              }   	  
 		  	        }
@@ -104,9 +104,10 @@ public class GerenteElementos {
 		          //perdió vida o game over
 	              if (nave.checkCollision(b)) {
 		            //asteroide se destruye con el choque             
-	            	 balls1.remove(i);
-	            	 balls2.remove(i);
-	            	 i--;
+	            	 //balls1.remove(i);
+	            	 //balls2.remove(i);
+	            	 //i--;
+	            	  b.recibeDaño(2);
 	              }   	  
   	        }
 	      for (int i = 0; i < roca1.size(); i++) {
@@ -129,6 +130,8 @@ public class GerenteElementos {
 	    	  tesoro.draw(batch);
 	    	  if(nave.checkCollision(tesoro)) score+=tesoro.getPuntos();
 	      }
+	      
+	      cleanupEliminados();
 	}
     public boolean agregarBala(Bala bb) {
     	return balas.add(bb);
@@ -136,7 +139,23 @@ public class GerenteElementos {
     public boolean nivelCompleto() {
     	return(balls1.size()==0);
     }
+
 	public int getScore() {
 		return score;
 	}
+
+    
+    public void cleanupEliminados() {
+    	for (int i = 0; i < balls1.size(); i++) {
+    		
+    		Enemigo e = balls1.get(i); 
+            if (e.eliminado()) {
+           
+          	 balls1.remove(i);
+          	 balls2.remove(i);
+          	 i--;
+            }
+    	}
+    }
+
 }

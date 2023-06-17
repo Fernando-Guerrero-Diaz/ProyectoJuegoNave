@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Rectangle;
 public class Tesoro extends Movimiento implements Pickup {
     private int puntos = 100;
     private boolean activo;
+    private boolean eliminado=false;
 
  
     public Tesoro(int x, int y, int size, int xSpeed, int ySpeed, Texture tx) {
@@ -64,11 +65,18 @@ public class Tesoro extends Movimiento implements Pickup {
 	
 	public int getPuntos() {
 		activo = false;
+		eliminado=true;
 		return puntos;
 		
 	}
 	public boolean estaActivo() {
 		return activo;
+	}
+
+
+	public boolean eliminado() {
+
+		return eliminado;
 	}
 
 }
