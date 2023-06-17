@@ -135,32 +135,11 @@ public class Nave extends Movimiento{
         // disparo
         
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)&&cooldownDisparo==0) {         
-            	float xbullet,ybullet;
-            	if(rotacion>90 && rotacion<180) {
-            		xbullet=spr.getX()-spr.getWidth()*8/9;
-            		ybullet=spr.getY()-spr.getHeight()*1/9;
-            	}
-            	else if(rotacion>=180 && rotacion<270) {
-            		xbullet=spr.getX()-spr.getWidth()/3;
-            		ybullet=spr.getY()-spr.getHeight()/2;
-            	}
-            	else if(rotacion<=90 && rotacion >0) {
-            		xbullet=spr.getX()-spr.getHeight()/2;
-            		ybullet=spr.getY()+spr.getWidth();
-            	}
-            	else if(rotacion>=270 && rotacion<360) {
-            		xbullet=spr.getX()+spr.getHeight()*3/5;
-            		ybullet=spr.getY();
-            	}
-            	else {
-            		xbullet=spr.getX()+spr.getWidth()/2;
-            		ybullet=spr.getY()+ spr.getHeight()/2;
-            	}
-              Bala  balaL = new Bala(xbullet,ybullet,(int)(-7*Math.cos(Math.toRadians(rotacion))),(int)(-7*Math.sin(Math.toRadians(rotacion))),txBala);
-              Bala  balaR = new Bala(xbullet,ybullet,(int)(7*Math.cos(Math.toRadians(rotacion))),(int)(7*Math.sin(Math.toRadians(rotacion))),txBala);
+           Shoot disparo = new Shoot();
+           disparo.setStrategy(new BalasLaterales());
+           disparo.shoot(gerente,rotacion, spr, txBala);
           cooldownDisparo=100;
-          gerente.agregarBala(balaL);
-          gerente.agregarBala(balaR);
+
 	      soundBala.play();
         }
         
