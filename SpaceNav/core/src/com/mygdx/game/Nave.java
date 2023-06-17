@@ -31,6 +31,7 @@ public class Nave extends Movimiento{
     private float rotAcc=0.2f;
     private int cooldownDisparo=0;
     private int cooldownDano=0;
+    private Shoot disparo;
     
     public Nave (int x, int y, Texture tx, Sound soundChoque, Texture txBala, Sound soundBala) {
     	sonidoHerido = soundChoque;
@@ -40,6 +41,8 @@ public class Nave extends Movimiento{
     	spr.setPosition(x, y);
     	//spr.setOriginCenter();
     	spr.setBounds(x, y, 60, 92);
+    	disparo = new Shoot();
+        disparo.setStrategy(new BalasLaterales());
 
     }
     
@@ -135,8 +138,7 @@ public class Nave extends Movimiento{
         // disparo
         
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)&&cooldownDisparo==0) {         
-           Shoot disparo = new Shoot();
-           disparo.setStrategy(new BalasLaterales());
+
            disparo.shoot(gerente,rotacion, spr, txBala);
           cooldownDisparo=100;
 
