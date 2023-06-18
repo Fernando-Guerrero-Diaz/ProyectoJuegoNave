@@ -146,11 +146,11 @@ public class GerenteElementos {
 	      }
 	      if (remo.estaActivo()) {
 	    	  remo.draw(batch);
-	    	  if(nave.checkCollision(remo)) score+=remo.getPuntos();
+	    	  if(nave.checkCollision(remo)) {score+=remo.getPuntos();nave.nuevaVel(3.0f);}
 	      }
 	      if (polvora.estaActivo()) {
 	    	  polvora.draw(batch);
-	    	  if(nave.checkCollision(polvora)) score+=polvora.getPuntos();
+	    	  if(nave.checkCollision(polvora)) {score+=polvora.getPuntos();nave.nuevoCooldown(90);}
 	      }
 	      
 	      cleanupEliminados();

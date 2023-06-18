@@ -30,6 +30,7 @@ public class Nave extends Movimiento{
     private float rotVMax=5.0f;
     private float rotAcc=0.2f;
     private int cooldownDisparo=0;
+    private int maxCooldown=100;
     private int cooldownDano=0;
     private Shoot disparo;
     
@@ -140,7 +141,7 @@ public class Nave extends Movimiento{
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)&&cooldownDisparo==0) {         
 
            disparo.shoot(gerente,rotacion, spr, txBala);
-          cooldownDisparo=100;
+          cooldownDisparo=maxCooldown;
 
 	      soundBala.play();
         }
@@ -185,7 +186,8 @@ public boolean estaDestruido() {
 public boolean estaHerido() {
 	   return herido;
 }
-
+public void nuevaVel(float bonus) {maxVelocidad=maxVelocidad+bonus;}
+public void nuevoCooldown(int reduccion) {maxCooldown=maxCooldown-reduccion;}
 public int getVidas() {return vidas;}
 public int getX() {return (int) spr.getX();}
 public int getY() {return (int) spr.getY();}
