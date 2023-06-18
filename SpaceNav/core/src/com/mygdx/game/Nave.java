@@ -153,7 +153,9 @@ public class Nave extends Movimiento{
        
     }
 
-
+public void changeStrategy(ShootStrategy shoot) {
+	disparo.setStrategy(shoot);
+}
 public boolean checkCollision(Elemento b) {
 	if(cooldownDano<=0) {
 	if (b instanceof Obstaculo) {

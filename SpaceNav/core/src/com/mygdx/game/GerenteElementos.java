@@ -20,6 +20,7 @@ public class GerenteElementos {
 	private int score;
 	private Tesoro remo;
 	private Tesoro polvora;
+	private Tesoro canon;
 	
 	public GerenteElementos(int score, int velXAsteroides, int velYAsteroides, int cantAsteroides, int cantObstaculos,int velYroca) {
 		this.score=score;
@@ -58,6 +59,11 @@ public class GerenteElementos {
   	            50+r.nextInt((int)Gdx.graphics.getHeight()-50),
   	            20+r.nextInt(10), velXAsteroides+r.nextInt(4), velYAsteroides+r.nextInt(4), 
   	            new Texture(Gdx.files.internal("polvora.png")),0);
+	 // crear canon
+	    canon = new Tesoro(r.nextInt((int)Gdx.graphics.getWidth()),
+  	            50+r.nextInt((int)Gdx.graphics.getHeight()-50),
+  	            20+r.nextInt(10), velXAsteroides+r.nextInt(4), velYAsteroides+r.nextInt(4), 
+  	            new Texture(Gdx.files.internal("canon.png")),0);
 	}
 	
 	public void update(Nave nave, SpriteBatch batch) {
@@ -93,6 +99,7 @@ public class GerenteElementos {
 		      
 		     if(remo.estaActivo()) remo.moverse();
 		     if(polvora.estaActivo()) polvora.moverse();
+		     if(canon.estaActivo()) canon.moverse();
 		      
 		      //colisiones entre asteroides y sus rebotes  
 		      for (int i=0;i<balls1.size();i++) {
@@ -151,6 +158,10 @@ public class GerenteElementos {
 	      if (polvora.estaActivo()) {
 	    	  polvora.draw(batch);
 	    	  if(nave.checkCollision(polvora)) {score+=polvora.getPuntos();nave.nuevoCooldown(90);}
+	      }
+	      if (canon.estaActivo()) {
+	    	  canon.draw(batch);
+	    	  if(nave.checkCollision(canon)) {score+=canon.getPuntos();nave.changeStrategy(new BalasFrontales());}
 	      }
 	      
 	      cleanupEliminados();
