@@ -18,6 +18,8 @@ public class GerenteElementos {
 	private ArrayList<Roca> roca2 = new ArrayList<>();
 	private Tesoro tesoro;
 	private int score;
+	private Tesoro remo;
+	private Tesoro polvora;
 	
 	public GerenteElementos(int score, int velXAsteroides, int velYAsteroides, int cantAsteroides, int cantObstaculos,int velYroca) {
 		this.score=score;
@@ -45,8 +47,17 @@ public class GerenteElementos {
 	    tesoro = new Tesoro(r.nextInt((int)Gdx.graphics.getWidth()),
   	            50+r.nextInt((int)Gdx.graphics.getHeight()-50),
   	            20+r.nextInt(10), velXAsteroides+r.nextInt(4), velYAsteroides+r.nextInt(4), 
-  	            new Texture(Gdx.files.internal("Tesoro.png")));	
-	
+  	            new Texture(Gdx.files.internal("Tesoro.png")),100);
+	    // crear remo
+	    remo = new Tesoro(r.nextInt((int)Gdx.graphics.getWidth()),
+  	            50+r.nextInt((int)Gdx.graphics.getHeight()-50),
+  	            20+r.nextInt(10), velXAsteroides+r.nextInt(4), velYAsteroides+r.nextInt(4), 
+  	            new Texture(Gdx.files.internal("remo.png")),0);
+	    // crear polvora
+	    polvora = new Tesoro(r.nextInt((int)Gdx.graphics.getWidth()),
+  	            50+r.nextInt((int)Gdx.graphics.getHeight()-50),
+  	            20+r.nextInt(10), velXAsteroides+r.nextInt(4), velYAsteroides+r.nextInt(4), 
+  	            new Texture(Gdx.files.internal("polvora.png")),0);
 	}
 	
 	public void update(Nave nave, SpriteBatch batch) {
@@ -79,6 +90,9 @@ public class GerenteElementos {
 		    	  
 		      }
 		      if (tesoro.estaActivo()) tesoro.moverse();
+		      
+		     if(remo.estaActivo()) remo.moverse();
+		     if(polvora.estaActivo()) polvora.moverse();
 		      
 		      //colisiones entre asteroides y sus rebotes  
 		      for (int i=0;i<balls1.size();i++) {
@@ -129,6 +143,14 @@ public class GerenteElementos {
 	      if (tesoro.estaActivo()) {
 	    	  tesoro.draw(batch);
 	    	  if(nave.checkCollision(tesoro)) score+=tesoro.getPuntos();
+	      }
+	      if (remo.estaActivo()) {
+	    	  remo.draw(batch);
+	    	  if(nave.checkCollision(remo)) score+=remo.getPuntos();
+	      }
+	      if (polvora.estaActivo()) {
+	    	  polvora.draw(batch);
+	    	  if(nave.checkCollision(polvora)) score+=polvora.getPuntos();
 	      }
 	      
 	      cleanupEliminados();

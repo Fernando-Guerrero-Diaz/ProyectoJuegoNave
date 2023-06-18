@@ -7,14 +7,15 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 
 public class Tesoro extends Movimiento implements Pickup {
-    private int puntos = 100;
+    private int puntos;
     private boolean activo;
     private boolean eliminado=false;
 
  
-    public Tesoro(int x, int y, int size, int xSpeed, int ySpeed, Texture tx) {
+    public Tesoro(int x, int y, int size, int xSpeed, int ySpeed, Texture tx,int puntos) {
     	spr = new Sprite(tx);
     	this.x = x; 
+    	this.puntos=puntos;
 	
     	//validar que borde de esfera no quede fuera
     	if (x-size < 0) this.x = x+size;
