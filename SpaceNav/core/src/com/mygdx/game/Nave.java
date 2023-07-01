@@ -8,7 +8,9 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 
-public class Nave implements Movimiento{
+public final class Nave implements Movimiento{
+	private static Nave instance;
+	public String value;
 	private boolean destruida = false;
     private int vidas = 50;
     private Sound sonidoHerido;
@@ -17,9 +19,7 @@ public class Nave implements Movimiento{
     private boolean herido = false;
     private int tiempoHeridoMax=50;
     private int tiempoHerido;
-    private Sprite spr;
-	private float xVel;
-	private float yVel;
+    
     private float rotacion =0.0f;
     private float direccion = 0.0f;
     private float maxVelocidad=5;
@@ -35,8 +35,16 @@ public class Nave implements Movimiento{
     private int maxCooldown=100;
     private int cooldownDano=0;
     private Shoot disparo;
+    private Sprite spr;
+    private int x=Gdx.graphics.getWidth()/2-50;
+    private int y=30;
+    private float xVel;
+    private float yVel;
     
-    public Nave (int x, int y, Texture tx, Sound soundChoque, Texture txBala, Sound soundBala) {
+    private Nave() {
+    	reinicio();
+    	
+    /*private Nave (int x, int y, Texture tx, Sound soundChoque, Texture txBala, Sound soundBala) {
     	sonidoHerido = soundChoque;
     	this.soundBala = soundBala;
     	this.txBala = txBala;
@@ -45,9 +53,33 @@ public class Nave implements Movimiento{
     	//spr.setOriginCenter();
     	spr.setBounds(x, y, 60, 92);
     	disparo = new Shoot();
-        disparo.setStrategy(new BalasLaterales());
+        disparo.setStrategy(new BalasLaterales());*/
 
     }
+    public void reinicio() {
+    	sonidoHerido = Gdx.audio.newSound(Gdx.files.internal("hurt.ogg"));
+    	this.soundBala = Gdx.audio.newSound(Gdx.files.internal("pop-sound.mp3"));
+    	this.txBala = new Texture(Gdx.files.internal("CannonballGrey.png"));
+    	spr = new Sprite(new Texture(Gdx.files.internal("North.png")));
+    	spr.setPosition(x, y);
+    	//spr.setOriginCenter();
+    	spr.setBounds(x, y, 60, 92);
+    	disparo = new Shoot();
+        disparo.setStrategy(new BalasLaterales());
+    	setVidas(50);
+    	destruida=false;
+    	/*nave = new Nave(Gdx.graphics.getWidth()/2-50,30,new Texture(Gdx.files.internal("North.png")),
+			Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")), 
+			new Texture(Gdx.files.internal("CannonballGrey.png")), 
+			Gdx.audio.newSound(Gdx.files.internal("pop-sound.mp3"))); */
+    }
+    public static synchronized Nave getNaveInstance() {
+    	if(instance==null) {
+    		instance = new Nave();
+    	}
+    	return instance;
+    }
+
     
 	@Override
 	public void moverse() {	
