@@ -6,40 +6,42 @@ import java.util.Random;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-public class Enemigo extends Movimiento implements Obstaculo{
+public class Enemigo extends Obstaculo implements Movimiento{
 	private int exitmargen=100;
 	private int entermargen=10;
-	private int daño=5;
+
 	private int spawnWait;
     private boolean activo;
-    private int vida=5;
+    private int vida;
 	
-    public Enemigo(float xVel, float yVel, Texture tx, int wait) {
-    	spr = new Sprite(tx);
+    public Enemigo(float xVel, float yVel, Texture tx, int wait, int daño, int vida) {
+    	setSpr(new Sprite(tx));
     	Random r = new Random();
-    	x=r.nextInt((int)Gdx.graphics.getWidth());
-    	y=Gdx.graphics.getHeight()+entermargen;
-        spr.setPosition(x, y);
-        this.setXSpeed(xVel);
-        this.setySpeed(yVel);
+    	setX(r.nextInt((int)Gdx.graphics.getWidth()));
+    	setY(Gdx.graphics.getHeight()+entermargen);
+        getSpr().setPosition(getX(), getY());
+        setxVel(xVel);
+        setyVel(yVel);
         spawnWait = wait;
         activo=false;
+        setDaño(daño);
+        this.vida=vida;
     }		
 
 	public void moverse() {
 		if (activo) {
-        x += getXSpeed();
-        y += getySpeed();
+        addX(getxVel());
+        addY(getyVel());
         
-        if ((x+getXSpeed()< -exitmargen))
-        	x=Gdx.graphics.getWidth()+entermargen;        	
-        else if(x+getXSpeed()+spr.getWidth() > Gdx.graphics.getWidth()+exitmargen+entermargen)
-        	x=-entermargen ;        
-        if (y+getySpeed() < -exitmargen +entermargen)
-        	y=Gdx.graphics.getHeight()+entermargen;
-        if(y+getySpeed()+spr.getHeight() > Gdx.graphics.getHeight()+exitmargen+entermargen)
-        	y=-entermargen;
-        spr.setPosition(x, y);
+        if ((getX()+getxVel()< -exitmargen))
+        	setX(Gdx.graphics.getWidth()+entermargen);        	
+        else if(getX()+getxVel()+getSpr().getWidth() > Gdx.graphics.getWidth()+exitmargen+entermargen)
+        	setX(-entermargen) ;        
+        if (getY()+getyVel() < -exitmargen +entermargen)
+        	setY(Gdx.graphics.getHeight()+entermargen);
+        if(getY()+getyVel()+getSpr().getHeight() > Gdx.graphics.getHeight()+exitmargen+entermargen)
+        	setY(-entermargen);
+        getSpr().setPosition(getX(), getY());
 		}
         else {
     		spawnWait--;
@@ -49,44 +51,29 @@ public class Enemigo extends Movimiento implements Obstaculo{
 		
 
     public Rectangle getArea() {
-    	return spr.getBoundingRectangle();
+    	return getSpr().getBoundingRectangle();
     }
     public void draw(SpriteBatch batch) {
-    	if(activo) spr.draw(batch);
+    	if(activo) getSpr().draw(batch);
     }
     
     public void checkCollision(Enemigo b2) {
-        if(b2.estaActivo() && spr.getBoundingRectangle().overlaps(b2.spr.getBoundingRectangle())){
+        if(b2.estaActivo() && getSpr().getBoundingRectangle().overlaps(b2.getSpr().getBoundingRectangle())){
         	// rebote de enemigos entre si
-            if (getXSpeed() ==0) setXSpeed(getXSpeed() + b2.getXSpeed()/2);
-          	setXSpeed(- getXSpeed());
-            if (getySpeed() ==0) setySpeed(getySpeed() + b2.getySpeed()/2);
-            setySpeed(- getySpeed());
+            if (getxVel() ==0) setxVel(getxVel() + b2.getxVel()/2);
+          	setxVel(- getxVel());
+            if (getyVel() ==0) setyVel(getyVel() + b2.getyVel()/2);
+            setyVel(- getyVel());
         }
     }
     	
-   	public float getXSpeed() {
-   		return xVel;
-   	}
-   	public void setXSpeed(float xVel) {
-   		this.xVel = xVel;
-   	}
-   	public float getySpeed() {
-   		return yVel;
-   	}
-   	public void setySpeed(float yVel) {
-   		this.yVel = yVel;
-   	}
     	
-    public int getDaño() {
-   		return daño;
-   	}
+
     	
    	public boolean esDestructible() {
    		return true;
    	}
 
-	@Override
 	public boolean estaActivo() {
 		// TODO Auto-generated method stub
 		return activo;

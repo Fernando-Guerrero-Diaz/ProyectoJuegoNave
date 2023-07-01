@@ -1,6 +1,6 @@
 package com.mygdx.game;
 
-public interface Pickup extends Elemento{
-	public int getPuntos();
+public abstract class Pickup extends Elemento{
+	public abstract int getPuntos();
 
 }

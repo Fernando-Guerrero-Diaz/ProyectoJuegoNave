@@ -30,7 +30,7 @@ public class GerenteElementos {
         Random r = new Random();
 	    for (int i = 0; i < cantAsteroides; i++) {
 	        Enemigo bb = new Enemigo(velXAsteroides+r.nextInt(4), velYAsteroides+r.nextInt(4), 
-	        		new Texture(Gdx.files.internal("enemy.png")),300 + i*wait);	   
+	        		new Texture(Gdx.files.internal("enemy.png")),300 + i*wait, 5,5);	   
 	  	    balls1.add(bb);
 	  	    balls2.add(bb);
 	  	}

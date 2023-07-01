@@ -6,64 +6,45 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 
-public class Tesoro extends Movimiento implements Pickup {
+public class Tesoro extends Pickup implements Movimiento {
     private int puntos;
     private boolean activo;
     private boolean eliminado=false;
 
  
-    public Tesoro(int x, int y, int size, int xSpeed, int ySpeed, Texture tx,int puntos) {
-    	spr = new Sprite(tx);
-    	this.x = x; 
+    public Tesoro(int x, int y, int size, int xSpeed, int ySpeed, Texture tx, int puntos) {
+    	setSpr(new Sprite(tx));
+    	setX(x); 
     	this.puntos=puntos;
 	
     	//validar que borde de esfera no quede fuera
-    	if (x-size < 0) this.x = x+size;
-    	if (x+size > Gdx.graphics.getWidth())this.x = x-size;
-         
-    	this.y = y;
+    	if (x-size < 0) setX(x+size);
+    	if (x+size > Gdx.graphics.getWidth()) setX(x-size);
+    			 
+    	setY(y);
     	//validar que borde de esfera no quede fuera
-		if (y-size < 0) this.y = y+size;
-		if (y+size > Gdx.graphics.getHeight())this.y = y-size;
+    	if (y-size < 0) setY(y+size);
+    	if (y+size > Gdx.graphics.getHeight()) setY(y-size);
     	
-    	spr.setPosition(x, y);
-    	this.setXSpeed(xSpeed);
-    	this.setySpeed(ySpeed);
+    	setSprPosition();
+		setxVel(xSpeed);
+		setyVel(ySpeed);
     	activo = true;
     }
 	
 	public void moverse() {
-        x += getXSpeed();
-        y += getySpeed();
+        addX(getxVel());
+        addY(getyVel());
         
-        if (x+getXSpeed() < 0 || x+getXSpeed()+spr.getWidth() > Gdx.graphics.getWidth())
-        	setXSpeed(getXSpeed() * -1);
-        if (y+getySpeed() < 0 || y+getySpeed()+spr.getHeight() > Gdx.graphics.getHeight())
-        	setySpeed(getySpeed() * -1);
-        spr.setPosition(x, y);
+        if (getX()+getxVel() < 0 || getX()+getxVel()+getSpr().getWidth() > Gdx.graphics.getWidth())
+        	setxVel(getxVel() * -1);
+        if (getY()+getyVel() < 0 || getY()+getyVel()+getSpr().getHeight() > Gdx.graphics.getHeight())
+        	setyVel(getyVel() * -1);
+        setSprPosition();
 	}
 
-	   
-    public Rectangle getArea() {
-    	return spr.getBoundingRectangle();
-    }
-    public void draw(SpriteBatch batch) {
-    	spr.draw(batch);
-    }
     
-	public float getXSpeed() {
-		return xVel;
-	}
-	public void setXSpeed(float xVel) {
-		this.xVel = xVel;
-	}
-	public float getySpeed() {
-		return yVel;
-	}
-	public void setySpeed(float yVel) {
-		this.yVel = yVel;
-	}
-	
+
 	public int getPuntos() {
 		activo = false;
 		eliminado=true;

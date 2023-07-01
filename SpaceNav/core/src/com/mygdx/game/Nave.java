@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 
-public class Nave extends Movimiento{
+public class Nave implements Movimiento{
 	private boolean destruida = false;
     private int vidas = 50;
     private Sound sonidoHerido;
@@ -17,7 +17,9 @@ public class Nave extends Movimiento{
     private boolean herido = false;
     private int tiempoHeridoMax=50;
     private int tiempoHerido;
-    
+    private Sprite spr;
+	private float xVel;
+	private float yVel;
     private float rotacion =0.0f;
     private float direccion = 0.0f;
     private float maxVelocidad=5;

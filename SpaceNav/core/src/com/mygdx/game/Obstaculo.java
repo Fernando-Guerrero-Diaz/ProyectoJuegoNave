@@ -1,8 +1,14 @@
 package com.mygdx.game;
 
-public interface Obstaculo extends Elemento {
-	public int getDaño();
-	public boolean esDestructible();
-	public boolean estaActivo();
-	public void recibeDaño(int daño);
+public abstract class Obstaculo extends Elemento {
+	private int daño;
+	public int getDaño() {
+		return daño;
+	}
+	public void setDaño(int daño) {
+		this.daño=daño;
+	}
+	public abstract boolean esDestructible();
+	public abstract boolean estaActivo();
+	public abstract void recibeDaño(int daño);
 }
