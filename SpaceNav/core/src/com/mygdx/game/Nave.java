@@ -79,6 +79,9 @@ public final class Nave implements Movimiento{
     	}
     	return instance;
     }
+    public int getCantDisparos() {
+    	return disparo.getCantDisparos();
+    }
 
     
 	@Override

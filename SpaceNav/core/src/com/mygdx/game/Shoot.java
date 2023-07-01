@@ -14,10 +14,14 @@ public class Shoot {
 		shootStrategy.shoot(gerente, rotacion, spr, txBala);
 		cantDisparos --;
 		backLateral();
+		
 	}
 	public void backLateral() {
 		if (cantDisparos ==0) {
 			setStrategy(new BalasLaterales());
 		}
+	}
+	public int getCantDisparos() {
+		return cantDisparos;
 	}
 }

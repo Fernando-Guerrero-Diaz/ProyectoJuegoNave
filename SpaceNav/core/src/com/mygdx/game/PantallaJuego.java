@@ -79,6 +79,9 @@ public class PantallaJuego implements Screen {
 		//game.getFont().draw(batch, str, 10, 30);
 		game.getFont().draw(batch, "Score:"+gerente.getScore(), Gdx.graphics.getWidth()-150, 30);
 		game.getFont().draw(batch, "HighScore:"+game.getHighScore(), Gdx.graphics.getWidth()/2-100, 30);
+		if(nave.getCantDisparos()>0) {
+			game.getFont().draw(batch, "Balas Restantes:"+nave.getCantDisparos(), (Gdx.graphics.getWidth()/2)+140, 30);
+		}
 		//game.getBatch().draw(dinabarra,18,7,405,56);
 		game.getBatch().draw(barra, 0, 0, 458, 78);
 		//(nave.estaHerido()
