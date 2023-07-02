@@ -18,9 +18,10 @@ public class GerenteElementos {
 	private Tesoro polvora;
 	private Tesoro canon;
 	private Tesoro bomba;
+	private int cantEnemigos;
 	
 	public GerenteElementos(int velXAsteroides, int velYAsteroides, int cantAsteroides, int cantObstaculos,int velYroca) {
-
+		cantEnemigos = cantAsteroides;
 		int wait =200;
         //crear asteroides
         Random r = new Random();
@@ -151,7 +152,7 @@ public class GerenteElementos {
     	return balas.add(bb);
     }
     public boolean nivelCompleto() {
-    	return(elems1.size()==0);
+    	return(cantEnemigos<=0);
     }
 
 
@@ -161,10 +162,12 @@ public class GerenteElementos {
     		
     		Elemento e = elems1.get(i); 
             if (e.eliminado()) {
+            	if(e instanceof Enemigo) cantEnemigos--;
            
           	 elems1.remove(i);
           	 elems2.remove(i);
           	 i--;
+          	 
             }
     	}
     }
