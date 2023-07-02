@@ -39,8 +39,8 @@ public class PantallaJuego implements Screen {
 	private Nave nave;
 
 
-	public PantallaJuego(SpaceNavigation game, int ronda, int vidas,  
-			int velXAsteroides, int velYAsteroides, int cantAsteroides, int cantObstaculos,int velYroca) {
+	public PantallaJuego(SpaceNavigation game, int ronda,int velXAsteroides, 
+			int velYAsteroides, int cantAsteroides, int cantObstaculos,int velYroca) {
 		this.game = game;
 		this.ronda = ronda;
 		gerente = new GerenteElementos(velXAsteroides, velYAsteroides, cantAsteroides, cantObstaculos,velYroca);
@@ -68,7 +68,6 @@ public class PantallaJuego implements Screen {
 	    // cargar imagen de la nave, 64x64 
 		
 	    nave = Nave.getNaveInstance();
-        nave.setVidas(vidas);
         if(ronda == 1) {
 			nave.reinicio();
 		}
@@ -132,8 +131,8 @@ public class PantallaJuego implements Screen {
 	      score=nave.getScore();
 	      //nivel completado
 	      if (gerente.nivelCompleto()) {
-			Screen ss = new PantallaJuego(game,ronda+1, nave.getVidas(), 
-					velXAsteroides+1, velYAsteroides+1, cantAsteroides+1,cantObstaculos+1,velYroca);
+			Screen ss = new PantallaJuego(game,ronda+1,	velXAsteroides+1, 
+					velYAsteroides+1, cantAsteroides+1,cantObstaculos+1,velYroca);
 			ss.resize(1200, 800);
 			game.setScreen(ss);
 			dispose();
