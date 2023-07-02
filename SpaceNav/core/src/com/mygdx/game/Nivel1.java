@@ -41,28 +41,28 @@ public class Nivel1 implements FabricaElementos {
 
 	@Override
 	public Elemento getCañon(int x, int y) {
-	    Tesoro cañon = new Tesoro(x, 50+y, 20+r.nextInt(10), -2+r.nextInt(5), -2+r.nextInt(5), 
+	    Tesoro cañon = new Canon(x, 50+y, 20+r.nextInt(10), -2+r.nextInt(5), -2+r.nextInt(5), 
   	            new Texture(Gdx.files.internal("canon.png")),0);
 		return cañon;
 	}
 
 	@Override
 	public Elemento getPolvora(int x, int y) {
-	    Tesoro polvora = new Tesoro(x, 50+y, 20+r.nextInt(10), -2+r.nextInt(5), -2+r.nextInt(5), 
+	    Tesoro polvora = new Polvora(x, 50+y, 20+r.nextInt(10), -2+r.nextInt(5), -2+r.nextInt(5), 
   	            new Texture(Gdx.files.internal("polvora.png")),0);
 		return polvora;
 	}
 
 	@Override
 	public Elemento getRemo(int x, int y) {
-	    Tesoro remo = new Tesoro(x, 50+y, 20+r.nextInt(10), -2+r.nextInt(5), -2+r.nextInt(5), 
+	    Tesoro remo = new Remo(x, 50+y, 20+r.nextInt(10), -2+r.nextInt(5), -2+r.nextInt(5), 
   	            new Texture(Gdx.files.internal("remo.png")),0);
 		return remo;
 	}
 
 	@Override
 	public Elemento getBomba(int x, int y) {
-	    Tesoro bomba = new Tesoro(x, 50+y, 20+r.nextInt(10), -2+r.nextInt(5), -2+r.nextInt(5), 
+	    Tesoro bomba = new Bomba(x, 50+y, 20+r.nextInt(10), -2+r.nextInt(5), -2+r.nextInt(5), 
   	            new Texture(Gdx.files.internal("bomba.png")),0);
 		return bomba;
 	}

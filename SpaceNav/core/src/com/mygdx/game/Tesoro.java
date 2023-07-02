@@ -78,4 +78,10 @@ public class Tesoro extends Pickup implements Movimiento {
 	@Override
 	public void checkCollision(Elemento e2) {}
 
+	@Override
+	public void getPower() {
+
+		
+	}
+
 }
