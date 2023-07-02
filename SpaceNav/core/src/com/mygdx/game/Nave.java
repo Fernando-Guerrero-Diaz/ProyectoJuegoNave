@@ -32,7 +32,7 @@ public final class Nave implements Movimiento{
     private float rotVMax=5.0f;
     private float rotAcc=0.2f;
     private int cooldownDisparo=0;
-    private int maxCooldown=100;
+    private int maxCooldown=90;
     private int cooldownDano=0;
     private Shoot disparo;
     private Sprite spr;
@@ -48,7 +48,7 @@ public final class Nave implements Movimiento{
     }
     public void nuevaRonda() {
     	maxVelocidad=5;
-    	maxCooldown=100;
+    	maxCooldown=90;
     	disparo.setStrategy(new BalasLaterales());
     }
     public void reinicio() {
