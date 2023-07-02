@@ -193,11 +193,12 @@ public final class Nave implements Movimiento{
 public void changeStrategy(ShootStrategy shoot) {
 	disparo.setStrategy(shoot);
 }
-public boolean checkCollision(Elemento b) {
+public boolean checkCollision(Elemento e) {
 	if(cooldownDano<=0) {
-	if (b instanceof Obstaculo) {
-
-        if(!herido && b.getArea().overlaps(spr.getBoundingRectangle())){
+        if(!herido && e.estaActivo() && e.getArea().overlaps(spr.getBoundingRectangle())){
+        	e.colisionNave();
+        	
+        	/*
         	Obstaculo o = (Obstaculo) b;
         	if (!o.estaActivo())return false;
         	//actualizar vidas y herir
@@ -209,13 +210,11 @@ public boolean checkCollision(Elemento b) {
             if (vidas<=0) 
           	    destruida = true; 
             return true;
+            */
     	}
 
     }
-	}
-    if (b instanceof Pickup) {
-    	if(b.getArea().overlaps(spr.getBoundingRectangle())) return true;
-    }
+
     return false;
 }
 

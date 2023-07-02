@@ -57,12 +57,12 @@ public class Enemigo extends Obstaculo implements Movimiento{
     	if(activo) getSpr().draw(batch);
     }
     
-    public void checkCollision(Enemigo b2) {
-        if(b2.estaActivo() && getSpr().getBoundingRectangle().overlaps(b2.getSpr().getBoundingRectangle())){
+    public void checkCollision(Elemento e2) {
+        if(e2.estaActivo() && getArea().overlaps(e2.getArea()) && (e2 instanceof Obstaculo)){
         	// rebote de enemigos entre si
-            if (getxVel() ==0) setxVel(getxVel() + b2.getxVel()/2);
+            if (getxVel() ==0) setxVel(getxVel() + e2.getxVel()/2);
           	setxVel(- getxVel());
-            if (getyVel() ==0) setyVel(getyVel() + b2.getyVel()/2);
+            if (getyVel() ==0) setyVel(getyVel() + e2.getyVel()/2);
             setyVel(- getyVel());
         }
     }
@@ -91,6 +91,12 @@ public class Enemigo extends Obstaculo implements Movimiento{
 	public void recibeDaño(int daño) {
 		vida = vida - daño;
 		
+	}
+
+	@Override
+	public void colisionBala(int daño) {
+		// TODO Auto-generated method stub
+		recibeDaño(daño);
 	}
 
 }

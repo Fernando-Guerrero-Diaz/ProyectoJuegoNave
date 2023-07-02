@@ -66,7 +66,14 @@ public class Roca extends Obstaculo implements Movimiento{
 	}
 
 
-	public void recibeDaño(int daño) {
-	
+	public void recibeDaño(int daño) {  }
+
+	@Override
+	public void colisionBala(int daño) {	}
+
+	@Override
+	public void checkCollision(Elemento e2) {
+		// TODO Auto-generated method stub
+		
 	}
 }

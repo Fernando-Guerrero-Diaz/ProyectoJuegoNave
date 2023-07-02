@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 
-public abstract class Elemento {
+public abstract class Elemento implements Movimiento{
 	private float y;
 	private float x;
 	private float xVel;
@@ -16,8 +16,11 @@ public abstract class Elemento {
 	public  Rectangle getArea() {
 		return spr.getBoundingRectangle();
 	}
-	
-	//public abstract void doCollision();
+
+	public abstract void colisionNave();
+	public abstract void colisionBala(int daño);
+	public abstract boolean esDestructible();
+	public abstract boolean estaActivo();
 	
 	public void draw(SpriteBatch batch) {
 	   	spr.draw(batch);
@@ -64,5 +67,8 @@ public abstract class Elemento {
 	public void addY(float y) {
 		this.y+=y;
 	}
+
+	public abstract void checkCollision(Elemento e2);
+
 	
 }

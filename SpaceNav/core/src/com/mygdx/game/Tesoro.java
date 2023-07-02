@@ -33,14 +33,16 @@ public class Tesoro extends Pickup implements Movimiento {
     }
 	
 	public void moverse() {
-        addX(getxVel());
-        addY(getyVel());
-        
-        if (getX()+getxVel() < 0 || getX()+getxVel()+getSpr().getWidth() > Gdx.graphics.getWidth())
-        	setxVel(getxVel() * -1);
-        if (getY()+getyVel() < 0 || getY()+getyVel()+getSpr().getHeight() > Gdx.graphics.getHeight())
-        	setyVel(getyVel() * -1);
-        setSprPosition();
+		if (activo) {
+	        addX(getxVel());
+	        addY(getyVel());
+	        
+	        if (getX()+getxVel() < 0 || getX()+getxVel()+getSpr().getWidth() > Gdx.graphics.getWidth())
+	        	setxVel(getxVel() * -1);
+	        if (getY()+getyVel() < 0 || getY()+getyVel()+getSpr().getHeight() > Gdx.graphics.getHeight())
+	        	setyVel(getyVel() * -1);
+	        setSprPosition();
+		}
 	}
 
     
@@ -60,5 +62,11 @@ public class Tesoro extends Pickup implements Movimiento {
 
 		return eliminado;
 	}
+
+	@Override
+	public void colisionBala(int daño) {	}
+
+	@Override
+	public boolean esDestructible() {return false;}
 
 }

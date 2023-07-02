@@ -8,7 +8,6 @@ public abstract class Obstaculo extends Elemento {
 	public void setDaño(int daño) {
 		this.daño=daño;
 	}
-	public abstract boolean esDestructible();
-	public abstract boolean estaActivo();
+
 	public abstract void recibeDaño(int daño);
 }

@@ -34,21 +34,30 @@ public class Bala extends Elemento {
         
 	}
     
-    public boolean checkCollision(Enemigo b2) {
-        if(b2.estaActivo() && getArea().overlaps(b2.getArea())){
-        	// Se destruyen ambos
+    public void checkCollision(Elemento e) {
+    	
+        if(e.estaActivo() && getArea().overlaps(e.getArea()) && e.esDestructible()){
+        	//se destruye bala
             this.destroyed = true;
             explosionSound.play(0.15f);
-            b2.recibeDaño(daño);
-            return true;
+            e.colisionBala(daño);
+            
             
         }
-        return false;
+ 
     }
     
+    public void colisionBala(int daño) {};
+    public boolean esDestructible() {return true;}
     public boolean isDestroyed() {return destroyed;}
     
     public boolean eliminado() {return destroyed;}
+
+	@Override
+	public boolean estaActivo() {
+		// TODO Auto-generated method stub
+		return true;
+	}
     
 
 }
