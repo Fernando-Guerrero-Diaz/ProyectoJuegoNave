@@ -43,7 +43,8 @@ public class PantallaJuego implements Screen {
 			int velYAsteroides, int cantAsteroides, int cantObstaculos,int velYroca) {
 		this.game = game;
 		this.ronda = ronda;
-		gerente = new GerenteElementos(velXAsteroides, velYAsteroides, cantAsteroides, cantObstaculos,velYroca);
+		FabricaElementos fabrica = new Nivel1();
+		gerente = new GerenteElementos(cantAsteroides, cantObstaculos,fabrica);
 		this.velXAsteroides = velXAsteroides;
 		this.velYAsteroides = velYAsteroides;
 		this.cantAsteroides = cantAsteroides;

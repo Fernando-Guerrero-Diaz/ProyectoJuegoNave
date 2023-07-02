@@ -13,67 +13,49 @@ public class GerenteElementos {
 	private ArrayList<Elemento> elems1 = new ArrayList<>();
 	private ArrayList<Elemento> elems2 = new ArrayList<>();
 	private  ArrayList<Bala> balas = new ArrayList<>();
-	private Tesoro tesoro;
-	private Tesoro remo;
-	private Tesoro polvora;
-	private Tesoro canon;
-	private Tesoro bomba;
+	private Elemento tesoro;
+	private Elemento remo;
+	private Elemento polvora;
+	private Elemento canon;
+	private Elemento bomba;
 	private int cantEnemigos;
-	
-	public GerenteElementos(int velXAsteroides, int velYAsteroides, int cantAsteroides, int cantObstaculos,int velYroca) {
-		cantEnemigos = cantAsteroides;
+	private FabricaElementos fabrica;
+	public GerenteElementos(int cantEnemigos, int cantObstaculos, FabricaElementos fabrica) {
+		this.cantEnemigos = cantEnemigos;
+		this.fabrica = fabrica;
 		int wait =200;
         //crear asteroides
         Random r = new Random();
-	    for (int i = 0; i < cantAsteroides; i++) {
-	        Enemigo bb = new Enemigo(velXAsteroides+r.nextInt(4), velYAsteroides+r.nextInt(4), 
-	        		new Texture(Gdx.files.internal("enemy.png")),300 + i*wait, 5,5);	   
+	    for (int i = 0; i < cantEnemigos; i++) {
+	        Elemento bb = fabrica.getEnemigo(300 + i*wait);
 	  	    elems1.add(bb);
 	  	    elems2.add(bb);
 	  	}
 	    //crear rocas 
 	    for (int i = 0; i < cantObstaculos; i++) {
-	        Roca b2 = new Roca(r.nextInt((int)Gdx.graphics.getWidth()),
-	  	            20+r.nextInt((int)Gdx.graphics.getHeight()-50),
-	  	            250, 0, -velYAsteroides+r.nextInt(1), 
-	  	            new Texture(Gdx.files.internal("rocaObstaculo.png")),300 + i*wait);	   
+	        Elemento b2 = fabrica.getRoca(300 + i*wait);
 	  	    elems1.add(b2);
 	  	    elems2.add(b2);
 	    }
 	    
 	    //crear tesoro
-	    tesoro = new Tesoro(r.nextInt((int)Gdx.graphics.getWidth()),
-  	            50+r.nextInt((int)Gdx.graphics.getHeight()-50),
-  	            20+r.nextInt(10), velXAsteroides+r.nextInt(4), velYAsteroides+r.nextInt(4), 
-  	            new Texture(Gdx.files.internal("Tesoro.png")),100);
+	    tesoro = fabrica.getTesoro(cantEnemigos, cantObstaculos, 0);
 	    elems1.add(tesoro);
 	    elems2.add(tesoro);
 	    // crear remo
-	    remo = new Tesoro(r.nextInt((int)Gdx.graphics.getWidth()),
-  	            50+r.nextInt((int)Gdx.graphics.getHeight()-50),
-  	            20+r.nextInt(10), velXAsteroides+r.nextInt(4), velYAsteroides+r.nextInt(4), 
-  	            new Texture(Gdx.files.internal("remo.png")),0);
+	    remo = fabrica.getRemo(cantObstaculos, 0);
 	    elems1.add(remo); 
 	    elems2.add(remo);
 	    // crear polvora
-	    polvora = new Tesoro(r.nextInt((int)Gdx.graphics.getWidth()),
-  	            50+r.nextInt((int)Gdx.graphics.getHeight()-50),
-  	            20+r.nextInt(10), velXAsteroides+r.nextInt(4), velYAsteroides+r.nextInt(4), 
-  	            new Texture(Gdx.files.internal("polvora.png")),0);
+	    polvora = fabrica.getPolvora(cantObstaculos, 0);
 	    elems1.add(polvora);
 	    elems2.add(polvora);
 	 // crear canon
-	    canon = new Tesoro(r.nextInt((int)Gdx.graphics.getWidth()),
-  	            50+r.nextInt((int)Gdx.graphics.getHeight()-50),
-  	            20+r.nextInt(10), velXAsteroides+r.nextInt(4), velYAsteroides+r.nextInt(4), 
-  	            new Texture(Gdx.files.internal("canon.png")),0);
+	    canon = fabrica.getCañon(cantObstaculos, 0);
 	    elems1.add(canon);
 	    elems2.add(canon);
 	 // crear bomba
-	    bomba = new Tesoro(r.nextInt((int)Gdx.graphics.getWidth()),
-  	            50+r.nextInt((int)Gdx.graphics.getHeight()-50),
-  	            20+r.nextInt(10), velXAsteroides+r.nextInt(4), velYAsteroides+r.nextInt(4), 
-  	            new Texture(Gdx.files.internal("bomba.png")),0);
+	    bomba = fabrica.getBomba(cantObstaculos, 0);
 	    elems1.add(bomba);
 	    elems2.add(bomba);
 	}
@@ -124,26 +106,6 @@ public class GerenteElementos {
 	            nave.checkCollision(e); 
   	        }
 
-	      if (tesoro.estaActivo()) {
-	    	  tesoro.draw(batch);
-	    	  if(nave.checkCollision(tesoro)) nave.agregarPuntos(tesoro.getPuntos());
-	      }
-	      if (remo.estaActivo()) {
-	    	  remo.draw(batch);
-	    	  if(nave.checkCollision(remo)) {nave.agregarPuntos(remo.getPuntos());nave.nuevaVel(3.0f);}
-	      }
-	      if (polvora.estaActivo()) {
-	    	  polvora.draw(batch);
-	    	  if(nave.checkCollision(polvora)) {nave.agregarPuntos(polvora.getPuntos());nave.nuevoCooldown(90);}
-	      }
-	      if (canon.estaActivo()) {
-	    	  canon.draw(batch);
-	    	  if(nave.checkCollision(canon)) {nave.agregarPuntos(canon.getPuntos());nave.changeStrategy(new BalasFrontales());}
-	      }
-	      if (bomba.estaActivo()) {
-	    	  bomba.draw(batch);
-	    	  if(nave.checkCollision(bomba)) {nave.agregarPuntos(bomba.getPuntos());nave.changeStrategy(new BalasTotales());}
-	      }
 	      
 	      
 	      cleanupEliminados();
