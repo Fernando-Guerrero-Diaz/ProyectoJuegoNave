@@ -39,7 +39,7 @@ public class GerenteElementos {
 	    }
 	    
 	    //crear tesoro
-	    tesoro = fabrica.getTesoro(cantEnemigos, cantObstaculos, 0);
+	    tesoro = fabrica.getTesoro(cantEnemigos, cantObstaculos, 100);
 	    elems1.add(tesoro);
 	    elems2.add(tesoro);
 	    // crear remo
