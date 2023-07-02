@@ -66,10 +66,14 @@ public class PantallaJuego implements Screen {
 		gameMusic.setVolume(0.20f);
 		gameMusic.play();
 		
-	    // cargar imagen de la nave, 64x64   
+	    // cargar imagen de la nave, 64x64 
+		
 	    nave = Nave.getNaveInstance();
         nave.setVidas(vidas);
-
+        if(ronda == 1) {
+			nave.reinicio();
+		}
+        nave.nuevaRonda();
 	}
     
 	public void dibujaEncabezado() {

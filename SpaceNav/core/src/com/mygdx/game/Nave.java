@@ -56,6 +56,11 @@ public final class Nave implements Movimiento{
         disparo.setStrategy(new BalasLaterales());*/
 
     }
+    public void nuevaRonda() {
+    	maxVelocidad=5;
+    	maxCooldown=100;
+    	disparo.setStrategy(new BalasLaterales());
+    }
     public void reinicio() {
     	sonidoHerido = Gdx.audio.newSound(Gdx.files.internal("hurt.ogg"));
     	this.soundBala = Gdx.audio.newSound(Gdx.files.internal("pop-sound.mp3"));
