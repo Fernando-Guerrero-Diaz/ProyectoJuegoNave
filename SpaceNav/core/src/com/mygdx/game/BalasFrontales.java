@@ -10,6 +10,7 @@ public class BalasFrontales implements ShootStrategy{
 	public int disparos() {
 		return 20;
 	}
+	//Dependiendo del angulo del barco es como se dispara las balas frontales.
 	public void shoot(GerenteElementos gerente, float rotacion, Sprite spr, Texture txBala) {
 		float xbullet,ybullet;
 		if(rotacion>90 && rotacion<180) {

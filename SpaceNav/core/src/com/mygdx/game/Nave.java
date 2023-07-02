@@ -66,11 +66,9 @@ public final class Nave implements Movimiento{
     	maxVelocidad=5;
     	maxCooldown=100;
     	score=0;
-    	/*nave = new Nave(Gdx.graphics.getWidth()/2-50,30,new Texture(Gdx.files.internal("North.png")),
-			Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")), 
-			new Texture(Gdx.files.internal("CannonballGrey.png")), 
-			Gdx.audio.newSound(Gdx.files.internal("pop-sound.mp3"))); */
+
     }
+    //Función para solo inicializar una vez Nave, Se aplica singleton aqui.
     public static synchronized Nave getNaveInstance() {
     	if(instance==null) {
     		instance = new Nave();
@@ -84,6 +82,7 @@ public final class Nave implements Movimiento{
     
 	@Override
 	public void moverse() {	
+		//Comando del movimiento de la nave a través del teclado
 	    if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.DOWN)) direccion = 135.0f;
 	    else if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.UP)) direccion = 45.0f;
 	    else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.UP)) direccion = 315.0f;
@@ -187,27 +186,16 @@ public final class Nave implements Movimiento{
         if(cooldownDano<0)cooldownDano=0;
        
     }
-
+//Función de estrategia de disparo en el juego.
 public void changeStrategy(ShootStrategy shoot) {
 	disparo.setStrategy(shoot);
 }
+//Función de checkeo de las colisiones
 public boolean checkCollision(Elemento e) {
 	if(cooldownDano<=0) {
         if(!herido && e.estaActivo() && e.getArea().overlaps(spr.getBoundingRectangle())){
         	e.colisionNave();
         	
-        	/*
-        	Obstaculo o = (Obstaculo) b;
-        	if (!o.estaActivo())return false;
-        	//actualizar vidas y herir
-            vidas=vidas- o.getDaño();
-            herido = true;
-            cooldownDano=100;
-  		    tiempoHerido=tiempoHeridoMax;
-  		    sonidoHerido.play();
-            if (vidas<=0) 
-          	    destruida = true; 
-          	    */
             return true;
             
     	}
@@ -216,6 +204,7 @@ public boolean checkCollision(Elemento e) {
 
     return false;
 }
+//Calculo del daño que se recibe al golpear la nave y periodo de invunerabilidad
 public void recibirDaño(int daño) {
     vidas=vidas- daño;
     herido = true;
@@ -225,6 +214,7 @@ public void recibirDaño(int daño) {
     if (vidas<=0) 
   	    destruida = true; 
 }
+//Se agrega el nuevo score de la nave.
 public void agregarPuntos(int punto) {
 	score=punto+score;
 }
@@ -235,7 +225,9 @@ public boolean estaDestruido() {
 public boolean estaHerido() {
 	   return herido;
 }
+//modficación de velocidad por agarrar 1 pickup de remo
 public void nuevaVel(float bonus) {maxVelocidad=maxVelocidad+bonus;}
+//Reducción de coooldown al agarrar el barill de polvora
 public void nuevoCooldown(int reduccion) {maxCooldown=maxCooldown-reduccion;}
 public int getVidas() {return vidas;}
 public int getX() {return (int) spr.getX();}

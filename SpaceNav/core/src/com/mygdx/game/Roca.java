@@ -20,16 +20,6 @@ public class Roca extends Obstaculo implements Movimiento{
         setSpr(new Sprite(tx));
         setX(x); 
         setY(Gdx.graphics.getHeight()+margenEntradaSalida);
-        
-        /*validar que borde de esfera no quede fuera
-        if (x-size < 0) setX(x+size);
-        if (x+size > Gdx.graphics.getWidth()) setX(x-size);
-
-
-        validar que borde de esfera no quede fuera
-        if (y-size < 0) setY(y+size);
-        if (y+size > Gdx.graphics.getHeight()) setY(y-size);
-        */
         setSprPosition();
         setxVel(xSpeed);
         setyVel(ySpeed);
@@ -79,7 +69,7 @@ public class Roca extends Obstaculo implements Movimiento{
 	}
 
 	public boolean eliminado() {
-
+		//Cuando los obstaculos den 3 vueltas a la pantalla son eliminados.
         if(vueltas>=2460)return true;
 
         return false;

@@ -8,8 +8,9 @@ public class BalasTotales implements ShootStrategy {
 		
 	}
 	public int disparos() {
-		return 3;
+		return 5;
 	}
+	//Son la forma de disparo en 8 direcciones diferentes que se disparan por agarrar 1 pick up
 	public void shoot(GerenteElementos gerente, float rotacion, Sprite spr, Texture txBala) {
 		float xbullet,ybullet;
       if(rotacion>90 && rotacion<180) {

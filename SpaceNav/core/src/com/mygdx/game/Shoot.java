@@ -10,12 +10,14 @@ public class Shoot {
 		this.shootStrategy=shootStrategy;
 		cantDisparos=shootStrategy.disparos();
 	}
+	//estrategia para cambiar disparos
 	public void shoot(GerenteElementos gerente, float rotacion, Sprite spr, Texture txBala) {
 		shootStrategy.shoot(gerente, rotacion, spr, txBala);
 		cantDisparos --;
 		backLateral();
 		
 	}
+	//Cuando se acaban los disparos especiales se vuelve a los disparos laterales
 	public void backLateral() {
 		if (cantDisparos ==0) {
 			setStrategy(new BalasLaterales());

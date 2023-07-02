@@ -65,9 +65,8 @@ public class PantallaJuego implements Screen {
 		gameMusic.setVolume(0.20f);
 		gameMusic.play();
 		
-	    // cargar imagen de la nave, 64x64 
-		
 	    nave = Nave.getNaveInstance();
+	    //Cuando el juego es reiniciado la nave se resetea sus estadisticas.
         if(ronda == 1) {
 			nave.reinicio();
 		}
@@ -76,19 +75,17 @@ public class PantallaJuego implements Screen {
     
 	public void dibujaEncabezado() {
 		int x=405,ac=x;
-		//CharSequence str = "Vidas: "+nave.getVidas()+" Ronda: "+ronda;
+		//Se dibuja la barra de vida, score y alta puntación por la pantalla de juego.
 		game.getFont().getData().setScale(2f);		
-		//game.getFont().draw(batch, str, 10, 30);
 		game.getFont().draw(batch, "Score:"+nave.getScore(), Gdx.graphics.getWidth()-150, 30);
 		game.getFont().draw(batch, "HighScore:"+game.getHighScore(), Gdx.graphics.getWidth()/2-100, 30);
 		if(nave.getCantDisparos()>0) {
 			game.getFont().draw(batch, "Balas Restantes:"+nave.getCantDisparos(), (Gdx.graphics.getWidth()/2)+140, 30);
 		}
-		//game.getBatch().draw(dinabarra,18,7,405,56);
 		game.getBatch().draw(barra, 0, 0, 458, 78);
-		//(nave.estaHerido()
 			ac=x*nave.getVidas()/50;
 			if(ac<0) ac=0;
+			//Se actualiza la barra de vida en el juego
 			game.getBatch().draw(dinabarra,18,7,ac,56);
 			game.getBatch().draw(barra, 0, 0, 458, 78);
 	}
@@ -120,10 +117,12 @@ public class PantallaJuego implements Screen {
   		  }
 		  dibujaEncabezado();
 		  if(ronda==2) {
+			  //Diferente fondo de pantalla del nivel 2
 	    	  ocean = new Texture(Gdx.files.internal("newOcean.jpg"));
 	    	  ocean2 = new Texture(Gdx.files.internal("newOcean.jpg"));
 	      }
 	      else if(ronda==3) {
+	    	  //diferente fondo de pantalla del nivel 3
 	    	  ocean = new Texture(Gdx.files.internal("newOcean1.jpg"));
 	    	  ocean2 = new Texture(Gdx.files.internal("newOcean1.jpg"));
 	      }

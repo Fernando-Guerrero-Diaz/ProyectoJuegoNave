@@ -16,7 +16,7 @@ public abstract class Elemento implements Movimiento{
 	public  Rectangle getArea() {
 		return spr.getBoundingRectangle();
 	}
-
+	//Funciones abstractas que sus clases "hijas" van a solucionarlo.
 	public abstract void colisionNave();
 	public abstract void colisionBala(int daño);
 	public abstract boolean esDestructible();

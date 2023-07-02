@@ -32,6 +32,7 @@ public class PantallaGameOver implements Screen {
 
 	@Override
 	public void render(float delta) {
+		//Se agrega a la pantalla de game over con sus mensajes.
 		ScreenUtils.clear(0, 0, 0.2f, 1);
 
 		camera.update();
@@ -43,7 +44,7 @@ public class PantallaGameOver implements Screen {
 		game.getFont().draw(game.getBatch(), "Pincha en cualquier lado para reiniciar ...", 400, 300);
 	
 		game.getBatch().end();
-
+		// Se vuelve a inicializar el juego luego de "perder"
 		if (Gdx.input.isTouched() || Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY)) {
 			Nave.getNaveInstance().reinicio();
 			Screen ss = new PantallaJuego(game,1,1,1,10,2,1);

@@ -10,6 +10,7 @@ public class BalasLaterales implements ShootStrategy{
 	public int disparos() {
 		return -1;
 	}
+	//Son las balas por defectos que se disparan de forma lateral.
 	public void shoot(GerenteElementos gerente, float rotacion, Sprite spr, Texture txBala) {
 		float xbullet,ybullet;
     	if(rotacion>90 && rotacion<180) {

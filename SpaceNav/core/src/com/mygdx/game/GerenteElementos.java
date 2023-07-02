@@ -79,7 +79,7 @@ public class GerenteElementos {
 	
 	public void update(Nave nave, SpriteBatch batch) {
 	      if (!nave.estaHerido()) {
-		      // colisiones entre balas y asteroides y su destruccion  
+		      // colisiones entre balas y enemigos y la destrucción de balas  
 	    	  for (int i = 0; i < balas.size(); i++) {
 		            Bala b = balas.get(i);
 		            b.moverse();
@@ -98,22 +98,6 @@ public class GerenteElementos {
 	    	  for (Elemento elem :elems1) {
 	    		  elem.moverse();
 	    	  }
-	    	  /*
-		      for (Enemigo ball : balls1) {
-		          ball.moverse();
-		      }
-		      for(Roca roca : roca1) {
-		    	  roca.moverse();
-		    	  
-		      }
-		      
-		      if (tesoro.estaActivo()) tesoro.moverse();
-		      
-		     if(remo.estaActivo()) remo.moverse();
-		     if(polvora.estaActivo()) polvora.moverse();
-		     if(canon.estaActivo()) canon.moverse();
-		     if(bomba.estaActivo()) bomba.moverse();
-		     */
 		      
 		      //colisiones entre asteroides y sus rebotes  
 		      for (int i=0;i<elems1.size();i++) {
@@ -138,26 +122,7 @@ public class GerenteElementos {
 	    	    e.draw(batch);
 	            nave.checkCollision(e); 
   	        }
-	      /*
-	      for (int i = 0; i < roca1.size(); i++) {
-	    	    Roca b=roca1.get(i);
-	    	    b.draw(batch);
-		          //perdió vida o game over
-	              nave.checkCollision(b);
-		            //asteroide se destruye con el choque             
-	            	 //roca1.remove(i);
-	            	 //roca2.remove(i);
-	            	 //i--;
-	              //}   	  
-	        }
-	        */
-	      /*
-	      for (int i = 0; i < roca1.size(); i++) {
-	    	    Roca b=roca1.get(i);
-	    	    b.draw(batch);
-	      }*/
-	      
-	      
+
 	      if (tesoro.estaActivo()) {
 	    	  tesoro.draw(batch);
 	    	  if(nave.checkCollision(tesoro)) nave.agregarPuntos(tesoro.getPuntos());
@@ -190,7 +155,7 @@ public class GerenteElementos {
     }
 
 
-    
+    //Elimina los elementos del array cuando son eliminados de la pantalla
     public void cleanupEliminados() {
     	for (int i = 0; i < elems1.size(); i++) {
     		

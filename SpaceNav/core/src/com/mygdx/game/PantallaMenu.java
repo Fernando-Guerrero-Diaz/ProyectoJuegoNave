@@ -33,7 +33,7 @@ public class PantallaMenu implements Screen {
 	@Override
 	public void render(float delta) {
 		ScreenUtils.clear(0, 0, 0.2f, 1);
-
+		// Se agrega un mensaje y fondo a la pantalla para avisarle al jugador que pronto va a jugar.
 		camera.update();
 		game.getBatch().setProjectionMatrix(camera.combined);
 
@@ -45,7 +45,7 @@ public class PantallaMenu implements Screen {
 		game.getFont().draw(game.getBatch(), "Pincha en cualquier lado o presiona cualquier tecla para comenzar ...", 250, 250);
 	
 		game.getBatch().end();
-
+		// Se inicia el juego luego de teclear cualquier tecla
 		if (Gdx.input.isTouched() || Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY)) {
 			Screen ss = new PantallaJuego(game,1,1,1,10,2,1);
 			ss.resize(1200, 800);
