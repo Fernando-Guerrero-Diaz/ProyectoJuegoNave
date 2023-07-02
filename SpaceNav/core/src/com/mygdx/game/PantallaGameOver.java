@@ -47,7 +47,7 @@ public class PantallaGameOver implements Screen {
 		// Se vuelve a inicializar el juego luego de "perder"
 		if (Gdx.input.isTouched() || Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY)) {
 			Nave.getNaveInstance().reinicio();
-			Screen ss = new PantallaJuego(game,1,1,1,10,2,1);
+			Screen ss = new PantallaJuego(game,1,10,2);
 			ss.resize(1200, 800);
 			game.setScreen(ss);
 			dispose();
