@@ -68,6 +68,8 @@ public final class Nave implements Movimiento{
         disparo.setStrategy(new BalasLaterales());
     	setVidas(50);
     	destruida=false;
+    	maxVelocidad=5;
+    	maxCooldown=100;
     	/*nave = new Nave(Gdx.graphics.getWidth()/2-50,30,new Texture(Gdx.files.internal("North.png")),
 			Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")), 
 			new Texture(Gdx.files.internal("CannonballGrey.png")), 
