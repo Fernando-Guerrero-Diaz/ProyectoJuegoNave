@@ -41,7 +41,7 @@ public class GerenteElementos {
 	        Roca b2 = new Roca(r.nextInt((int)Gdx.graphics.getWidth()),
 	  	            20+r.nextInt((int)Gdx.graphics.getHeight()-50),
 	  	            250, 0, -velYAsteroides+r.nextInt(1), 
-	  	            new Texture(Gdx.files.internal("rocaObstaculo.png")));	   
+	  	            new Texture(Gdx.files.internal("rocaObstaculo.png")),300 + i*wait);	   
 	  	    elems1.add(b2);
 	  	    elems2.add(b2);
 	    }

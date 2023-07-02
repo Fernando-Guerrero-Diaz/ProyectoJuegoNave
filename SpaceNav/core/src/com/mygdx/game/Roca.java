@@ -12,41 +12,58 @@ public class Roca extends Obstaculo implements Movimiento{
 	private int margenEntradaSalida = 30;
 	private int daño = 10;
 	private boolean activo;
+	private int spawnWait;
+    private int vueltas=0;
 
 		
-	public Roca(int x, int y, int size, int xSpeed, int ySpeed, Texture tx) {
-		setSpr(new Sprite(tx));
-		setX(x); 
-		
-		//validar que borde de esfera no quede fuera
-		if (x-size < 0) setX(x+size);
-		if (x+size > Gdx.graphics.getWidth()) setX(x-size);
-		 
-		setY(y);
-		//validar que borde de esfera no quede fuera
-		if (y-size < 0) setY(y+size);
-		if (y+size > Gdx.graphics.getHeight()) setY(y-size);
-		
-		setSprPosition();
-		setxVel(xSpeed);
-		setyVel(ySpeed);
-	}
-	
-	public void moverse() {
-        addX(getxVel());
-        addY(getyVel());
-        Random r = new Random();
-        if ((getX()+getxVel()< -margenEntradaSalida))
-        	setX(Gdx.graphics.getWidth()+margenEntradaSalida);        	
-        else if(getX()+getxVel()+getSpr().getWidth() > Gdx.graphics.getWidth()+margenEntradaSalida*2)
-        	setX(-margenEntradaSalida) ;        
-        if (getY()+getyVel() < -margenEntradaSalida) {
-        	setY(Gdx.graphics.getHeight()+margenEntradaSalida);
-        	setX(50+r.nextInt((int)Gdx.graphics.getHeight()-50));
-        }
-        if(getY()+getyVel()+getSpr().getHeight() > Gdx.graphics.getHeight()+margenEntradaSalida*2)
-        	setY(Gdx.graphics.getHeight());
+    public Roca(int x, int y, int size, int xSpeed, int ySpeed, Texture tx,int wait) {
+        setSpr(new Sprite(tx));
+        setX(x); 
+        setY(Gdx.graphics.getHeight()+margenEntradaSalida);
+        
+        /*validar que borde de esfera no quede fuera
+        if (x-size < 0) setX(x+size);
+        if (x+size > Gdx.graphics.getWidth()) setX(x-size);
+
+
+        validar que borde de esfera no quede fuera
+        if (y-size < 0) setY(y+size);
+        if (y+size > Gdx.graphics.getHeight()) setY(y-size);
+        */
         setSprPosition();
+        setxVel(xSpeed);
+        setyVel(ySpeed);
+        spawnWait=wait;
+        activo=false;
+    }
+
+    public void moverse() {
+        if(activo) {
+            addX(getxVel());
+            addY(getyVel());
+            Random r = new Random();
+            if ((getX()+getxVel()< -margenEntradaSalida)) {
+                setX(Gdx.graphics.getWidth()+margenEntradaSalida);
+                vueltas=vueltas+1;
+            }
+            if(getX()+getxVel()+getSpr().getWidth() > Gdx.graphics.getWidth()+margenEntradaSalida*2) {
+                setX(-margenEntradaSalida) ;
+                vueltas=vueltas+1;
+                }
+            if (getY()+getyVel() < -margenEntradaSalida) {
+                setY(Gdx.graphics.getHeight()+margenEntradaSalida);
+                setX(50+r.nextInt((int)Gdx.graphics.getHeight()-50));
+                vueltas=vueltas+1;
+            }
+            if(getY()+getyVel()+getSpr().getHeight() > Gdx.graphics.getHeight()+margenEntradaSalida*2)
+                setY(Gdx.graphics.getHeight());
+                setSprPosition();
+                vueltas=vueltas+1;
+            }
+        else {
+        spawnWait--;
+        if (spawnWait<=0)activo=true;
+        }
     }
  
 	
@@ -62,7 +79,10 @@ public class Roca extends Obstaculo implements Movimiento{
 	}
 
 	public boolean eliminado() {
-		return false;
+
+        if(vueltas>=2460)return true;
+
+        return false;
 	}
 
 
