@@ -209,13 +209,23 @@ public boolean checkCollision(Elemento e) {
   		    sonidoHerido.play();
             if (vidas<=0) 
           	    destruida = true; 
+          	    */
             return true;
-            */
+            
     	}
 
     }
 
     return false;
+}
+public void recibirDaño(int daño) {
+    vidas=vidas- daño;
+    herido = true;
+    cooldownDano=100;
+	    tiempoHerido=tiempoHeridoMax;
+	    sonidoHerido.play();
+    if (vidas<=0) 
+  	    destruida = true; 
 }
 
 public boolean estaDestruido() {

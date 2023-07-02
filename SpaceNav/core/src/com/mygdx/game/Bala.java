@@ -58,6 +58,12 @@ public class Bala extends Elemento {
 		// TODO Auto-generated method stub
 		return true;
 	}
+
+	@Override
+	public void colisionNave() {
+		// TODO Auto-generated method stub
+		
+	}
     
 
 }

@@ -99,4 +99,5 @@ public class Enemigo extends Obstaculo implements Movimiento{
 		recibeDaño(daño);
 	}
 
+
 }

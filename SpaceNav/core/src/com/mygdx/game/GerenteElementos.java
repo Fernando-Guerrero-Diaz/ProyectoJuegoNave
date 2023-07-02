@@ -142,14 +142,7 @@ public class GerenteElementos {
 	      for (int i = 0; i < elems1.size(); i++) {
 	    	    Elemento  e=elems1.get(i);
 	    	    e.draw(batch);
-		          //perdió vida o game over
 	            nave.checkCollision(e); 
-		            //asteroide se destruye con el choque             
-	            	 //balls1.remove(i);
-	            	 //balls2.remove(i);
-	            	 //i--;
-	            	 // b.recibeDaño(2);
-	               	  
   	        }
 	      /*
 	      for (int i = 0; i < roca1.size(); i++) {
@@ -169,6 +162,8 @@ public class GerenteElementos {
 	    	    Roca b=roca1.get(i);
 	    	    b.draw(batch);
 	      }*/
+	      
+	      
 	      if (tesoro.estaActivo()) {
 	    	  tesoro.draw(batch);
 	    	  if(nave.checkCollision(tesoro)) score+=tesoro.getPuntos();
@@ -190,13 +185,14 @@ public class GerenteElementos {
 	    	  if(nave.checkCollision(bomba)) {score+=bomba.getPuntos();nave.changeStrategy(new BalasTotales());}
 	      }
 	      
+	      
 	      cleanupEliminados();
 	}
     public boolean agregarBala(Bala bb) {
     	return balas.add(bb);
     }
     public boolean nivelCompleto() {
-    	return(balls1.size()==0);
+    	return(elems1.size()==0);
     }
 
 	public int getScore() {
@@ -205,13 +201,13 @@ public class GerenteElementos {
 
     
     public void cleanupEliminados() {
-    	for (int i = 0; i < balls1.size(); i++) {
+    	for (int i = 0; i < elems1.size(); i++) {
     		
-    		Enemigo e = balls1.get(i); 
+    		Elemento e = elems1.get(i); 
             if (e.eliminado()) {
            
-          	 balls1.remove(i);
-          	 balls2.remove(i);
+          	 elems1.remove(i);
+          	 elems2.remove(i);
           	 i--;
             }
     	}
