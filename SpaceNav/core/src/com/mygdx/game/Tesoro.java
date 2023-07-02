@@ -69,13 +69,6 @@ public class Tesoro extends Pickup implements Movimiento {
 	@Override
 	public boolean esDestructible() {return false;}
 
-	@Override
-	public void colisionNave() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void checkCollision(Elemento e2) {}
 
 	@Override

@@ -34,12 +34,18 @@ public class PantallaJuego implements Screen {
 	private GerenteElementos gerente;
 	
 	private Nave nave;
+	private FabricaElementos fabrica;
 
 
 	public PantallaJuego(SpaceNavigation game, int ronda, int cantAsteroides, int cantObstaculos) {
 		this.game = game;
 		this.ronda = ronda;
-		FabricaElementos fabrica = new Nivel1();
+		if(ronda%2==1) {
+			fabrica = new Nivel1();
+		}
+		else if(ronda%2==0) {
+			fabrica = new Nivel2();
+		}
 		gerente = new GerenteElementos(cantAsteroides, cantObstaculos,fabrica);
 		this.cantAsteroides = cantAsteroides;
 		this.cantObstaculos = cantObstaculos;
