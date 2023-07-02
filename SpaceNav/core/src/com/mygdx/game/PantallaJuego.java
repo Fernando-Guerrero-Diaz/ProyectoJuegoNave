@@ -39,12 +39,11 @@ public class PantallaJuego implements Screen {
 	private Nave nave;
 
 
-	public PantallaJuego(SpaceNavigation game, int ronda, int vidas, int score,  
+	public PantallaJuego(SpaceNavigation game, int ronda, int vidas,  
 			int velXAsteroides, int velYAsteroides, int cantAsteroides, int cantObstaculos,int velYroca) {
 		this.game = game;
 		this.ronda = ronda;
-		this.score = score;
-		gerente = new GerenteElementos(score,velXAsteroides, velYAsteroides, cantAsteroides, cantObstaculos,velYroca);
+		gerente = new GerenteElementos(velXAsteroides, velYAsteroides, cantAsteroides, cantObstaculos,velYroca);
 		this.velXAsteroides = velXAsteroides;
 		this.velYAsteroides = velYAsteroides;
 		this.cantAsteroides = cantAsteroides;
@@ -81,7 +80,7 @@ public class PantallaJuego implements Screen {
 		//CharSequence str = "Vidas: "+nave.getVidas()+" Ronda: "+ronda;
 		game.getFont().getData().setScale(2f);		
 		//game.getFont().draw(batch, str, 10, 30);
-		game.getFont().draw(batch, "Score:"+gerente.getScore(), Gdx.graphics.getWidth()-150, 30);
+		game.getFont().draw(batch, "Score:"+nave.getScore(), Gdx.graphics.getWidth()-150, 30);
 		game.getFont().draw(batch, "HighScore:"+game.getHighScore(), Gdx.graphics.getWidth()/2-100, 30);
 		if(nave.getCantDisparos()>0) {
 			game.getFont().draw(batch, "Balas Restantes:"+nave.getCantDisparos(), (Gdx.graphics.getWidth()/2)+140, 30);
@@ -130,10 +129,10 @@ public class PantallaJuego implements Screen {
 	    	  ocean2 = new Texture(Gdx.files.internal("newOcean1.jpg"));
 	      }
 	      batch.end();
-	      score=gerente.getScore();
+	      score=nave.getScore();
 	      //nivel completado
 	      if (gerente.nivelCompleto()) {
-			Screen ss = new PantallaJuego(game,ronda+1, nave.getVidas(), score, 
+			Screen ss = new PantallaJuego(game,ronda+1, nave.getVidas(), 
 					velXAsteroides+1, velYAsteroides+1, cantAsteroides+1,cantObstaculos+1,velYroca);
 			ss.resize(1200, 800);
 			game.setScreen(ss);

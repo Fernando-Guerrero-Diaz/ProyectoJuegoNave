@@ -12,20 +12,14 @@ public class GerenteElementos {
 
 	private ArrayList<Elemento> elems1 = new ArrayList<>();
 	private ArrayList<Elemento> elems2 = new ArrayList<>();
-	private  ArrayList<Enemigo> balls1 = new ArrayList<>();
-	private  ArrayList<Enemigo> balls2 = new ArrayList<>();
 	private  ArrayList<Bala> balas = new ArrayList<>();
-	private ArrayList<Roca> roca1 = new ArrayList<>();
-	private ArrayList<Roca> roca2 = new ArrayList<>();
 	private Tesoro tesoro;
-	private int score;
 	private Tesoro remo;
 	private Tesoro polvora;
 	private Tesoro canon;
 	private Tesoro bomba;
 	
-	public GerenteElementos(int score, int velXAsteroides, int velYAsteroides, int cantAsteroides, int cantObstaculos,int velYroca) {
-		this.score=score;
+	public GerenteElementos(int velXAsteroides, int velYAsteroides, int cantAsteroides, int cantObstaculos,int velYroca) {
 
 		int wait =200;
         //crear asteroides
@@ -166,23 +160,23 @@ public class GerenteElementos {
 	      
 	      if (tesoro.estaActivo()) {
 	    	  tesoro.draw(batch);
-	    	  if(nave.checkCollision(tesoro)) score+=tesoro.getPuntos();
+	    	  if(nave.checkCollision(tesoro)) nave.agregarPuntos(tesoro.getPuntos());
 	      }
 	      if (remo.estaActivo()) {
 	    	  remo.draw(batch);
-	    	  if(nave.checkCollision(remo)) {score+=remo.getPuntos();nave.nuevaVel(3.0f);}
+	    	  if(nave.checkCollision(remo)) {nave.agregarPuntos(remo.getPuntos());nave.nuevaVel(3.0f);}
 	      }
 	      if (polvora.estaActivo()) {
 	    	  polvora.draw(batch);
-	    	  if(nave.checkCollision(polvora)) {score+=polvora.getPuntos();nave.nuevoCooldown(90);}
+	    	  if(nave.checkCollision(polvora)) {nave.agregarPuntos(polvora.getPuntos());nave.nuevoCooldown(90);}
 	      }
 	      if (canon.estaActivo()) {
 	    	  canon.draw(batch);
-	    	  if(nave.checkCollision(canon)) {score+=canon.getPuntos();nave.changeStrategy(new BalasFrontales());}
+	    	  if(nave.checkCollision(canon)) {nave.agregarPuntos(canon.getPuntos());nave.changeStrategy(new BalasFrontales());}
 	      }
 	      if (bomba.estaActivo()) {
 	    	  bomba.draw(batch);
-	    	  if(nave.checkCollision(bomba)) {score+=bomba.getPuntos();nave.changeStrategy(new BalasTotales());}
+	    	  if(nave.checkCollision(bomba)) {nave.agregarPuntos(bomba.getPuntos());nave.changeStrategy(new BalasTotales());}
 	      }
 	      
 	      
@@ -195,9 +189,6 @@ public class GerenteElementos {
     	return(elems1.size()==0);
     }
 
-	public int getScore() {
-		return score;
-	}
 
     
     public void cleanupEliminados() {

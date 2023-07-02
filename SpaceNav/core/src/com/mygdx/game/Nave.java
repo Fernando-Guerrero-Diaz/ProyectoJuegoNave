@@ -40,20 +40,10 @@ public final class Nave implements Movimiento{
     private int y=30;
     private float xVel;
     private float yVel;
+    private int score;
     
     private Nave() {
     	reinicio();
-    	
-    /*private Nave (int x, int y, Texture tx, Sound soundChoque, Texture txBala, Sound soundBala) {
-    	sonidoHerido = soundChoque;
-    	this.soundBala = soundBala;
-    	this.txBala = txBala;
-    	spr = new Sprite(tx);
-    	spr.setPosition(x, y);
-    	//spr.setOriginCenter();
-    	spr.setBounds(x, y, 60, 92);
-    	disparo = new Shoot();
-        disparo.setStrategy(new BalasLaterales());*/
 
     }
     public void nuevaRonda() {
@@ -75,6 +65,7 @@ public final class Nave implements Movimiento{
     	destruida=false;
     	maxVelocidad=5;
     	maxCooldown=100;
+    	score=0;
     	/*nave = new Nave(Gdx.graphics.getWidth()/2-50,30,new Texture(Gdx.files.internal("North.png")),
 			Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")), 
 			new Texture(Gdx.files.internal("CannonballGrey.png")), 
@@ -234,6 +225,9 @@ public void recibirDaño(int daño) {
     if (vidas<=0) 
   	    destruida = true; 
 }
+public void agregarPuntos(int punto) {
+	score=punto+score;
+}
 
 public boolean estaDestruido() {
    return !herido && destruida;
@@ -247,5 +241,9 @@ public int getVidas() {return vidas;}
 public int getX() {return (int) spr.getX();}
 public int getY() {return (int) spr.getY();}
 public void setVidas(int vidas2) {vidas = vidas2;}
+public int getScore() {
+	return score;
 }
+}	
+
 

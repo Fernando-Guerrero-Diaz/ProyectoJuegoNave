@@ -13,6 +13,10 @@ public abstract class Obstaculo extends Elemento {
 		nave.recibirDaño(this.getDaño());
 		recibeDaño(3);	
 	}
+	public void ganarPuntos(int a) {
+		Nave nave =Nave.getNaveInstance();
+		nave.agregarPuntos(a);
+	}
 
 	public abstract void recibeDaño(int daño);
 }

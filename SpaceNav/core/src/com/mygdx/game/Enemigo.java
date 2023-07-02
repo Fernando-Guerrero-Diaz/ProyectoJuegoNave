@@ -82,7 +82,10 @@ public class Enemigo extends Obstaculo implements Movimiento{
 	@Override
 	public boolean eliminado() {
 		
-		if(vida<=0)return true;
+		if(vida<=0) {
+		ganarPuntos(10);	
+		return true;
+		}
 		
 		return false;
 	}
