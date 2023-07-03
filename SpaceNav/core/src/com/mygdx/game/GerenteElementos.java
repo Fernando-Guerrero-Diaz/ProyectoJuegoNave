@@ -17,18 +17,13 @@ public class GerenteElementos {
 	private ArrayList<Elemento> elems2 = new ArrayList<>();
 	private  ArrayList<Bala> balas = new ArrayList<>();
 	private Elemento tesoro;
-	private Elemento remo;
-	private Elemento polvora;
-	private Elemento canon;
-	private Elemento bomba;
 	private int cantEnemigos;
 	private FabricaElementos fabrica;
 	public GerenteElementos(int cantEnemigos, int cantObstaculos, FabricaElementos fabrica) {
 		this.cantEnemigos = cantEnemigos;
 		this.fabrica = fabrica;
 		int wait =200;
-        //crear asteroides
-        Random r = new Random();
+        //crear enemigos
 	    for (int i = 0; i < cantEnemigos; i++) {
 	        Elemento bb = fabrica.getEnemigo(300 + i*wait);
 	  	    elems1.add(bb);
