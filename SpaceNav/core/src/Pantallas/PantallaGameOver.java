@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package Pantallas;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -7,6 +7,8 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.mygdx.game.Nave;
+import com.mygdx.game.SpaceNavigation;
 
 
 public class PantallaGameOver implements Screen {

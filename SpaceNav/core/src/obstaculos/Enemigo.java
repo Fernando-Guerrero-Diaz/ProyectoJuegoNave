@@ -1,6 +1,8 @@
-package com.mygdx.game;
+package obstaculos;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.game.Elemento;
+import com.mygdx.game.Movimiento;
 
 import java.util.Random;
 import com.badlogic.gdx.Gdx;

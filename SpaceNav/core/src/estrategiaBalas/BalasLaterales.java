@@ -1,6 +1,8 @@
-package com.mygdx.game;
+package estrategiaBalas;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.mygdx.game.Bala;
+import com.mygdx.game.GerenteElementos;
 import com.badlogic.gdx.graphics.Texture;
 
 public class BalasLaterales implements ShootStrategy{

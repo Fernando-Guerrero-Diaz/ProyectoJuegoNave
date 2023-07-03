@@ -1,7 +1,9 @@
-package com.mygdx.game;
+package estrategiaBalas;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.mygdx.game.Bala;
+import com.mygdx.game.GerenteElementos;
 
 public class BalasTotales implements ShootStrategy {
 	public BalasTotales(){

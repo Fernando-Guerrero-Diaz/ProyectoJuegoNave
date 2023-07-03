@@ -1,6 +1,7 @@
-package com.mygdx.game;
+package pickups;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.game.Nave;
 
 public class Remo extends Tesoro {
 

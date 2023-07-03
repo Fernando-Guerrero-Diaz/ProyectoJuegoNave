@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package obstaculos;
 
 import java.util.Random;
 
@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.game.Elemento;
+import com.mygdx.game.Movimiento;
 
 public class Roca extends Obstaculo implements Movimiento{
 	private int margenEntradaSalida = 30;

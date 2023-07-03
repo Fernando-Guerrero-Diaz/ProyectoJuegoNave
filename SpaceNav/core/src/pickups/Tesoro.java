@@ -1,10 +1,12 @@
-package com.mygdx.game;
+package pickups;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.game.Elemento;
+import com.mygdx.game.Movimiento;
 
 public class Tesoro extends Pickup implements Movimiento {
     private int puntos;

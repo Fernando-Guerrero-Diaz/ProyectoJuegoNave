@@ -8,6 +8,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import nivelesYFabrica.FabricaElementos;
+import obstaculos.Enemigo;
+
 public class GerenteElementos {
 
 	private ArrayList<Elemento> elems1 = new ArrayList<>();

@@ -1,4 +1,6 @@
-package com.mygdx.game;
+package nivelesYFabrica;
+
+import com.mygdx.game.Elemento;
 
 public interface FabricaElementos {
 

@@ -1,9 +1,17 @@
-package com.mygdx.game;
+package nivelesYFabrica;
 
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.game.Elemento;
+
+import obstaculos.Enemigo;
+import obstaculos.Roca;
+import pickups.Canon;
+import pickups.Polvora;
+import pickups.Remo;
+import pickups.Tesoro;
 
 public class Nivel1 implements FabricaElementos {
 	private float xVelEnemigo = 1.0f;

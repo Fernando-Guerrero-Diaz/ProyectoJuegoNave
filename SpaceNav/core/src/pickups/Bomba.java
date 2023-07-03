@@ -1,6 +1,9 @@
-package com.mygdx.game;
+package pickups;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.game.Nave;
+
+import estrategiaBalas.BalasTotales;
 
 public class Bomba extends Tesoro {
 

@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package Pantallas;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -11,6 +11,13 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.GerenteElementos;
+import com.mygdx.game.Nave;
+import com.mygdx.game.SpaceNavigation;
+
+import nivelesYFabrica.FabricaElementos;
+import nivelesYFabrica.Nivel1;
+import nivelesYFabrica.Nivel2;
 
 
 public class PantallaJuego implements Screen {

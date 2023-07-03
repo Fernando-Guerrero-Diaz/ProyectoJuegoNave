@@ -1,4 +1,7 @@
-package com.mygdx.game;
+package obstaculos;
+
+import com.mygdx.game.Elemento;
+import com.mygdx.game.Nave;
 
 public abstract class Obstaculo extends Elemento {
 	private int daño;

@@ -8,6 +8,10 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 
+import estrategiaBalas.BalasLaterales;
+import estrategiaBalas.Shoot;
+import estrategiaBalas.ShootStrategy;
+
 public final class Nave implements Movimiento{
 	private static Nave instance;
 	public String value;
