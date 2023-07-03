@@ -36,28 +36,7 @@ public class GerenteElementos {
 	        Elemento b2 = fabrica.getRoca(300 + i*wait);
 	  	    elems1.add(b2);
 	  	    elems2.add(b2);
-	    }
-	    
-	    //crear tesoro
-	    tesoro = fabrica.getTesoro(cantEnemigos, cantObstaculos, 100);
-	    elems1.add(tesoro);
-	    elems2.add(tesoro);
-	    // crear remo
-	    remo = fabrica.getRemo(cantObstaculos, 0);
-	    elems1.add(remo); 
-	    elems2.add(remo);
-	    // crear polvora
-	    polvora = fabrica.getPolvora(cantObstaculos, 0);
-	    elems1.add(polvora);
-	    elems2.add(polvora);
-	 // crear canon
-	    canon = fabrica.getCañon(cantObstaculos, 0);
-	    elems1.add(canon);
-	    elems2.add(canon);
-	 // crear bomba
-	    bomba = fabrica.getBomba(cantObstaculos, 0);
-	    elems1.add(bomba);
-	    elems2.add(bomba);
+	    	}
 	}
 	
 	public void update(Nave nave, SpriteBatch batch) {
@@ -124,8 +103,21 @@ public class GerenteElementos {
     		
     		Elemento e = elems1.get(i); 
             if (e.eliminado()) {
-            	if(e instanceof Enemigo) cantEnemigos--;
-           
+            	if(e instanceof Enemigo) { 
+            		cantEnemigos--;
+            		Random random = new Random();   
+            		int x = random.nextInt(100); 
+            		if(x<15) {
+            			tesoro=fabrica.getTesoro((int)e.getX(), (int)e.getY(), 100);
+            		    elems1.add(tesoro);
+            		    elems2.add(tesoro);
+            		}
+            		if(x>75) {
+            			Elemento powerup=fabrica.getRandomPower((int)e.getX(), (int)e.getY());
+            		    elems1.add(powerup);
+            		    elems2.add(powerup);
+            		}
+            	}
           	 elems1.remove(i);
           	 elems2.remove(i);
           	 i--;

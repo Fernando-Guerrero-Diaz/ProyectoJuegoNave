@@ -16,7 +16,18 @@ public class Nivel1 implements FabricaElementos {
 	public Nivel1() {
 		r = new Random();
 	}
-
+	public Elemento getRandomPower(int x, int y) {
+		Random random = new Random();   
+		int ra = random.nextInt(100);
+		if(ra<33) {
+			return getRemo(x,y);
+		}
+		else if(ra<66) {
+			return getCañon(x,y);
+		}
+		else
+			return getPolvora(x,y);
+	}
 	@Override
 	public Elemento getEnemigo(int wait) {
 		Enemigo ee = new Enemigo(xVelEnemigo+r.nextInt(2), yVelEnemigo+r.nextInt(2), 
@@ -39,32 +50,25 @@ public class Nivel1 implements FabricaElementos {
 		return tt;
 	}
 
-	@Override
+	
 	public Elemento getCañon(int x, int y) {
 	    Tesoro cañon = new Canon(x, 50+y, 20+r.nextInt(10), -2+r.nextInt(5), -2+r.nextInt(5), 
   	            new Texture(Gdx.files.internal("canon.png")),0);
 		return cañon;
 	}
 
-	@Override
+	
 	public Elemento getPolvora(int x, int y) {
 	    Tesoro polvora = new Polvora(x, 50+y, 20+r.nextInt(10), -2+r.nextInt(5), -2+r.nextInt(5), 
   	            new Texture(Gdx.files.internal("polvora.png")),0);
 		return polvora;
 	}
 
-	@Override
+	
 	public Elemento getRemo(int x, int y) {
 	    Tesoro remo = new Remo(x, 50+y, 20+r.nextInt(10), -2+r.nextInt(5), -2+r.nextInt(5), 
   	            new Texture(Gdx.files.internal("remo.png")),0);
 		return remo;
-	}
-
-	@Override
-	public Elemento getBomba(int x, int y) {
-	    Tesoro bomba = new Bomba(x, 50+y, 20+r.nextInt(10), -2+r.nextInt(5), -2+r.nextInt(5), 
-  	            new Texture(Gdx.files.internal("bomba.png")),0);
-		return bomba;
 	}
 
 }
